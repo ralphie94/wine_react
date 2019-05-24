@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Register from './register/register'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  handleRegister = async (data) => {
+    try {
+      const registerCall = await fetch('http://localhost:8000/users/registration', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      const response = await registerCall.json()
+      console.log(response, 'from the flask server');
+
+    } catch(err){
+      console.log(err)
+    }
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <Register handleRegister={this.handleRegister} />
+      </div>
+    );
+  }
 }
 
 export default App;
