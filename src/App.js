@@ -7,7 +7,9 @@ import Navbar from './navbar/navbar';
 import './App.css';
 
 class App extends Component {
-
+  state = {
+    logged: false,
+  }
   handleRegister = async (data) => {
     try {
       const registerCall = await fetch('http://localhost:8000/users/registration', {
@@ -27,13 +29,36 @@ class App extends Component {
     }
   }
 
+  handleLogin = async (info)=>{
+    try {
+      const loginResponse = await fetch('http://localhost:8000/users/login', {
+        method: "POST",
+        credentials:'include',
+        body: JSON.stringify(info),
+        headers: {
+          'Content-Type': "application/json"
+        }
+      })
+      const parsedData = await loginResponse.json()
+      console.log(parsedData);
+      if(parsedData.message = 'success'){
+        this.setState({
+          logged: true
+        })
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   render(){
     return (
       <div className="App">
       <Navbar />
       <Switch>
         <Route exact path={routes.REGISTER} render={() => <Register handleRegister={this.handleRegister}/>} />
-        <Route exact path={routes.LOGIN} render={() => <Login />}/>
+        <Route exact path={routes.LOGIN} render={() => <Login login={this.handleLogin}/>}/>
       </Switch>
       </div>
     );

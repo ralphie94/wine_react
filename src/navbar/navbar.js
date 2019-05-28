@@ -9,7 +9,7 @@ import "./navbar.css"
 class Navbar extends Component {
     render(){
         return(
-            <div class="nav">
+            <div className="nav">
                 <Link to={routes.HOME} className="active">Home</Link>
                 <Link to={routes.LOGIN} className="active">Login</Link>
                 <Link to={routes.REGISTER} className="active">Register</Link>
