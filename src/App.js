@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import * as routes from './constants/routes';
 import Register from './register/register';
 import Login from './login/login';
+import Home from './Home/home';
 import Navbar from './navbar/navbar';
 import './App.css';
 
@@ -59,6 +60,7 @@ class App extends Component {
       <Switch>
         <Route exact path={routes.REGISTER} render={() => <Register handleRegister={this.handleRegister}/>} />
         <Route exact path={routes.LOGIN} render={() => <Login login={this.handleLogin}/>}/>
+        <Route exact path={routes.HOME} render ={() => <Home />}/>
       </Switch>
       </div>
     );
