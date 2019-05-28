@@ -1,0 +1,11 @@
+.active {
+    font-size: 20px;
+    padding: 50px;
+    color: white;
+    text-decoration: none;
+}
+
+.nav {
+    background-color: rgb(90, 0, 50);
+    height: 60px;
+}

@@ -21,9 +21,9 @@ class Register extends Component {
         return(
             <form onSubmit={this.handleSubmit}>
             <h1>Register</h1>
-                <input type='text' name='username' onChange={this.handleChange}/><br/>
-                <input type='password' name='password' onChange={this.handleChange}/><br/>
-                <input type='password' name='verify_password' onChange={this.handleChange}/><br/>
+                <input type='text' name='username' placeholder='Username' onChange={this.handleChange}/><br/>
+                <input type='password' name='password' placeholder='Password' onChange={this.handleChange}/><br/>
+                <input type='password' name='verify_password' placeholder='Verify Password' onChange={this.handleChange}/><br/>
                 <button type='submit'>Register</button>
             </form>
         )

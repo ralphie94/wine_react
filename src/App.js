@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import Register from './register/register'
+import { Switch, Route } from "react-router-dom";
+import * as routes from './constants/routes';
+import Register from './register/register';
+import Login from './login/login';
+import Navbar from './navbar/navbar';
 import './App.css';
 
 class App extends Component {
@@ -26,7 +30,11 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <Register handleRegister={this.handleRegister} />
+      <Navbar />
+      <Switch>
+        <Route exact path={routes.REGISTER} render={() => <Register handleRegister={this.handleRegister}/>} />
+        <Route exact path={routes.LOGIN} render={() => <Login />}/>
+      </Switch>
       </div>
     );
   }
