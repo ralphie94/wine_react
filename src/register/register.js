@@ -5,7 +5,6 @@ import { Redirect } from "react-router-dom";
 const RegisterForms = styled.div`
     display: flex;
     align-content: center;
-    margin-top: 100px;
 `
 
 class Register extends Component {
