@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import Modal from "./editmodal"
+import EditModal from "./editmodal"
 
 class Profile extends Component {
     state = {
@@ -12,7 +12,6 @@ class Profile extends Component {
             [e.target.name]: e.target.value
         })
     }
-
     updateUser = async (e) => {
         e.preventDefault();
         const updatedUser = await fetch("http://localhost:8000/users", {
@@ -42,16 +41,17 @@ class Profile extends Component {
     render(){
         return(
             <div>
-            <h1>User Profile</h1>
-            <button onClick={this.showModal}>Edit</button>
-            <Modal show={this.state.showModal} hide={this.state.hideModal}>
-            <form className="loginforms" onSubmit={(e) => this.updateUser(e)}>
-            <h1>Edit Info</h1>
-                <input type="text" name="username" placeholder="Username" className="inputbox"></input><br/>
-                <input type="password" name="password" placeholder="Password" className="inputbox"></input><br/>
-                <button type="submit" className="btn">Edit</button>
-            </form>
-            </Modal>
+                <h1>User Profile</h1>
+                <button onClick={this.showModal}>Edit</button>
+                <EditModal show={this.state.showModal}>
+                    <h1>Edit Info</h1>
+                    <form onSubmit={(e) => this.updateUser(e)}>
+                        <input type="text" name="username" placeholder="Username" className="inputbox"></input><br/>
+                        <input type="password" name="password" placeholder="Password" className="inputbox"></input><br/>
+                        <button type="submit" className="btn">Save Changes</button>
+                        <button onClick={this.hideModal} className="btn">Close</button>
+                    </form>
+                </EditModal>
             </div>
         )
     }
