@@ -74,7 +74,7 @@ class App extends Component {
         <Route exact path={routes.HOME} render ={() => <Home />}/>
         <Route exact path={routes.EXPLORE} render ={()=> <Explore user={this.state.currentUser}/>} />
         <Route exact path={routes.PROFILE} render ={() => <Profile />}/>
-        <Route exact path={routes.FEED} render ={() => <Feed />}/>
+        {/* <Route exact path={routes.FEED} render ={() => <Feed />}/> */}
       </Switch>
       </div>
     );
