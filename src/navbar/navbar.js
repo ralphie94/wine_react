@@ -44,6 +44,12 @@ class Navbar extends Component {
                 <div className="none"></div>
                 <h1>Wine <span>Post</span></h1>
                 <div className="links">
+                {
+                   this.props.logged && <Link to={routes.PROFILE} className="nav-link">Profile</Link>
+                }
+                {
+                   this.props.logged && <Link to={routes.FEED} className="nav-link">Feed</Link>
+                }
                     <Link to={routes.HOME} className="nav-link">Home</Link>
                     <Link to={routes.LOGIN} className="nav-link">Login</Link>
                     <Link to={routes.REGISTER} className="nav-link">Register</Link>

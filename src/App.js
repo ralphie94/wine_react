@@ -6,6 +6,9 @@ import Register from './register/register';
 import Login from './login/login';
 import Home from './Home/home';
 import Explore from './explore/explore';
+import Navbar from './navbar/navbar';
+import Profile from './profile/profile';
+import Feed from './feed/feed';
 import './App.css';
 
 class App extends Component {
@@ -26,6 +29,11 @@ class App extends Component {
 
       const response = await registerCall.json()
       console.log(response, 'from the flask server');
+      if(response.message = 'success'){
+        this.setState({
+          logged: true
+        })
+      } 
 
     } catch(err){
       console.log(err)
@@ -60,12 +68,14 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-      <Navbar />
+      <Navbar logged={this.state.logged}/>
       <Switch>
-        <Route exact path={routes.REGISTER} render={() => <Register handleRegister={this.handleRegister}/>} />
-        <Route exact path={routes.LOGIN} render={() => <Login login={this.handleLogin}/>}/>
+        <Route exact path={routes.REGISTER} render={() => <Register handleRegister={this.handleRegister} logged={this.state.logged}/>} />
+        <Route exact path={routes.LOGIN} render={() => <Login login={this.handleLogin} logged={this.state.logged}/>}/>
         <Route exact path={routes.HOME} render ={() => <Home />}/>
         <Route exact path={routes.EXPLORE} render ={()=> <Explore user={this.state.currentUser}/>} />
+        <Route exact path={routes.PROFILE} render ={() => <Profile />}/>
+        <Route exact path={routes.FEED} render ={() => <Feed />}/>
       </Switch>
       </div>
     );
