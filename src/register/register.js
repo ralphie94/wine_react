@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
+const RegisterForms = styled.div`
+    display: flex;
+    align-content: center;
+    margin-top: 100px;
+`
 
 class Register extends Component {
     state = {
@@ -19,13 +26,15 @@ class Register extends Component {
 
     render(){
         return(
-            <form onSubmit={this.handleSubmit}>
-            <h1>Register</h1>
-                <input type='text' name='username' placeholder='Username' onChange={this.handleChange}/><br/>
-                <input type='password' name='password' placeholder='Password' onChange={this.handleChange}/><br/>
-                <input type='password' name='verify_password' placeholder='Verify Password' onChange={this.handleChange}/><br/>
-                <button type='submit'>Register</button>
-            </form>
+            <RegisterForms>
+                <form onSubmit={this.handleSubmit}>
+                <h1>Register</h1>
+                    <input type='text' name='username' placeholder='Username' onChange={this.handleChange}/><br/>
+                    <input type='password' name='password' placeholder='Password' onChange={this.handleChange}/><br/>
+                    <input type='password' name='verify_password' placeholder='Verify Password' onChange={this.handleChange}/><br/>
+                    <button type='submit'>Register</button>
+                </form>
+            </RegisterForms>
         )
     }
 }

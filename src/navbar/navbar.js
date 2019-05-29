@@ -11,10 +11,9 @@ const NavStyle = styled.div`
     background-color: rgb(90, 0, 50);
     height: 60px;
     display: flex;
-    position: fixed;
+    /* position: fixed; */
     z-index: 10;
     width: 100%;
-    
     .nav-link, h1 {
         font-size: 20px;
         color: white;
