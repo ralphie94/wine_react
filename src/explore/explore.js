@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import styled, {css} from 'styled-components';
 import NewPost from './newModal';
+import Feed from './feed';
 
 
 const ExplorePage = styled.div`
@@ -14,6 +15,12 @@ const ExplorePage = styled.div`
     .entire-feed{
         position: absolute;
         z-index: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .feed-posts{
+        display: flex;
+        overflow-y: scroll
     }
 `
 class Explore extends Component{
@@ -51,6 +58,7 @@ class Explore extends Component{
             })
             const parsedData = await data.json()
             console.log(parsedData)
+            return parsedData
         } catch (error) {
             console.log(error)
         }
@@ -89,6 +97,7 @@ class Explore extends Component{
                     <h1>Explore</h1>
                     <button onClick={this.showModal}>New Post</button>
                     posts will populate below...
+                    <Feed posts={this.state.posts}/>
                 </div>
                     <NewPost show={this.state.showModal}>
                         <div className="post-preview">
