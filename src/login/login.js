@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+import {Redirect, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 const LoginStyle = styled.div`
@@ -45,7 +45,9 @@ class Login extends Component {
     }
     render(){
         return(
-            <LoginStyle>
+            this.props.logged
+            ? <Redirect to='/'/>
+            : <LoginStyle>
             <form onSubmit={this.handleSubmit} className="loginforms">
                 <h1>Login</h1>
                 <input type='text' name='username' placeholder='Username' className='inputbox' value={this.state.username} onChange={this.handleChange}></input><br/>
