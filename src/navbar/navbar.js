@@ -48,7 +48,7 @@ class Navbar extends Component {
                    this.props.logged && <Link to={routes.PROFILE} className="nav-link">Profile</Link>
                 }
                 {
-                   this.props.logged && <Link to={routes.FEED} className="nav-link">Feed</Link>
+                   this.props.logged && <Link to={routes.EXPLORE} className="nav-link">Explore</Link>
                 }
                     <Link to={routes.HOME} className="nav-link">Home</Link>
                     <Link to={routes.LOGIN} className="nav-link">Login</Link>

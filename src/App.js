@@ -6,7 +6,6 @@ import Register from './register/register';
 import Login from './login/login';
 import Home from './Home/home';
 import Explore from './explore/explore';
-import Navbar from './navbar/navbar';
 import Profile from './profile/profile';
 import Feed from './feed/feed';
 import './App.css';
@@ -75,7 +74,7 @@ class App extends Component {
         <Route exact path={routes.HOME} render ={() => <Home />}/>
         <Route exact path={routes.EXPLORE} render ={()=> <Explore user={this.state.currentUser}/>} />
         <Route exact path={routes.PROFILE} render ={() => <Profile />}/>
-        <Route exact path={routes.FEED} render ={() => <Feed />}/>
+        {/* <Route exact path={routes.FEED} render ={() => <Feed />}/> */}
       </Switch>
       </div>
     );

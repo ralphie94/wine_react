@@ -24,6 +24,7 @@ class Explore extends Component{
         wine: '',
         vintage: '',
         comment: '',
+        posted_by: this.props.user
     }
     preventDefault = (e)=>{
         e.preventDefault();
@@ -43,6 +44,25 @@ class Explore extends Component{
             [e.target.name]: e.target.value
         })
     }
+    createPost = async ()=>{
+        try {
+            const data = await fetch('http://localhost:8000/wine/posts', {
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(this.state),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const parsedData = await data.json()
+            this.setState({
+                showModal: false
+            })
+            console.log(parsedData)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     render(){
         return(
             <ExploreFeed>
@@ -57,7 +77,7 @@ class Explore extends Component{
                             <img src={this.state.img}/>
                             <p>wine:{this.state.wine}</p>
                             <p>vintage:{this.state.vintage}</p>
-                            <p>{this.props.user}: {this.state.comment}</p>
+                            <p>{this.state.user}: {this.state.comment}</p>
                         </div>
                         <div className='post-info'>
                             <form onSubmit={this.preventDefault}>
@@ -65,7 +85,7 @@ class Explore extends Component{
                                 <input type='text' name='wine' placeholder="wine" value={this.state.wine} onChange={this.handleChange}/>
                                 <input type='text' name='vintage' placeholder="vintage" value={this.state.vintage} onChange={this.handleChange}/>
                                 <input type='text' name='comment' placeholder="comment" value={this.state.comment} onChange={this.handleChange}/>
-                                <button >Post</button>
+                                <button onClick={this.createPost}>Post</button>
                                 <button onClick={this.hideModal}>Cancel</button>
                             </form>
                         </div>
