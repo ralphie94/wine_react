@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Redirect } from "react-router-dom";
-
-const RegisterForms = styled.div`
-    display: flex;
-    align-content: center;
-`
+import './register.css'
 
 class Register extends Component {
     state = {
@@ -43,12 +39,12 @@ class Register extends Component {
 }
 const RegisterForm = ({handleChange, handleSubmit, username, password, verify_password}) => 
 
-<form onSubmit={e => handleSubmit(e)}>
+<form onSubmit={e => handleSubmit(e)} className='loginforms'>
 <h1>Register</h1>
-    <input type='text' name='username' placeholder='Username' onChange={handleChange} value={username}/><br/>
-    <input type='password' name='password' placeholder='Password' onChange={handleChange} value={password}/><br/>
-    <input type='password' name='verify_password' placeholder='Verify Password' onChange={handleChange} value={verify_password}/><br/>
-    <button type='submit'>Register</button>
+    <input type='text' name='username' placeholder='Username' className='inputbox' onChange={handleChange} value={username}/><br/>
+    <input type='password' name='password' placeholder='Password' className='inputbox' onChange={handleChange} value={password}/><br/>
+    <input type='password' name='verify_password' placeholder='Verify Password' className='inputbox' onChange={handleChange} value={verify_password}/><br/>
+    <button type='submit' className='btn'>Register</button>
 </form>
 
 

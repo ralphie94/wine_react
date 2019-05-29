@@ -6,7 +6,6 @@ import Register from './register/register';
 import Login from './login/login';
 import Home from './Home/home';
 import Explore from './explore/explore';
-import Navbar from './navbar/navbar';
 import Profile from './profile/profile';
 import Feed from './feed/feed';
 import './App.css';
