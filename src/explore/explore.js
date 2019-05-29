@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components';
 import NewPost from './newModal';
 
 
-const ExploreFeed = styled.div`
+const ExplorePage = styled.div`
     background-image: url("imgs/explorepg.jpg");
     background-position: center;
     background-size: cover;
@@ -44,6 +44,25 @@ class Explore extends Component{
             [e.target.name]: e.target.value
         })
     }
+    getPosts = async ()=>{
+        try {
+            const data = await fetch('http://localhost:8000/wine/posts', {
+                credentials: 'include'
+            })
+            const parsedData = await data.json()
+            console.log(parsedData)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    componentDidMount(){
+        console.log('component did mount')
+        this.getPosts().then(data=>{
+            this.setState({
+                posts: data
+            })
+        })
+    }
     createPost = async ()=>{
         try {
             const data = await fetch('http://localhost:8000/wine/posts', {
@@ -65,7 +84,7 @@ class Explore extends Component{
     }
     render(){
         return(
-            <ExploreFeed>
+            <ExplorePage>
                 <div className="entire-feed">
                     <h1>Explore</h1>
                     <button onClick={this.showModal}>New Post</button>
@@ -77,7 +96,7 @@ class Explore extends Component{
                             <img src={this.state.img}/>
                             <p>wine:{this.state.wine}</p>
                             <p>vintage:{this.state.vintage}</p>
-                            <p>{this.state.user}: {this.state.comment}</p>
+                            <p>{this.state.posted_by}: {this.state.comment}</p>
                         </div>
                         <div className='post-info'>
                             <form onSubmit={this.preventDefault}>
@@ -90,7 +109,7 @@ class Explore extends Component{
                             </form>
                         </div>
                     </NewPost>
-            </ExploreFeed>
+            </ExplorePage>
         )
     }
 }
