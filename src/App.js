@@ -54,7 +54,7 @@ class App extends Component {
       if(parsedData.message === 'success'){
         this.setState({
           logged: true,
-          currentUser: parsedData.user
+          currentUser: parsedData.user.username
 
         })
       }
