@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
 import * as routes from './constants/routes';
+import Navbar from './navbar/navbar';
 import Register from './register/register';
 import Login from './login/login';
 import Home from './Home/home';
-import Navbar from './navbar/navbar';
+import Explore from './explore/explore';
 import './App.css';
 
 class App extends Component {
   state = {
     logged: false,
+    currentUser: ""
   }
   handleRegister = async (data) => {
     try {
@@ -44,7 +46,9 @@ class App extends Component {
       console.log(parsedData);
       if(parsedData.message = 'success'){
         this.setState({
-          logged: true
+          logged: true,
+          currentUser: parsedData.user
+
         })
       }
 
@@ -61,6 +65,7 @@ class App extends Component {
         <Route exact path={routes.REGISTER} render={() => <Register handleRegister={this.handleRegister}/>} />
         <Route exact path={routes.LOGIN} render={() => <Login login={this.handleLogin}/>}/>
         <Route exact path={routes.HOME} render ={() => <Home />}/>
+        <Route exact path={routes.EXPLORE} render ={()=> <Explore user={this.state.currentUser}/>} />
       </Switch>
       </div>
     );

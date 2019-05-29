@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const RegisterForms = styled.div`
     display: flex;
     align-content: center;
-    margin-top: 100px;
 `
 
 class Register extends Component {
