@@ -51,7 +51,7 @@ class App extends Component {
       })
       const parsedData = await loginResponse.json()
       console.log(parsedData);
-      if(parsedData.message = 'success'){
+      if(parsedData.message === 'success'){
         this.setState({
           logged: true,
           currentUser: parsedData.user
