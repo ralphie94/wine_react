@@ -24,6 +24,11 @@ const Modal = styled.div`
         overflow-y: scroll;
         overflow-x: hidden;
     }
+    .post-preview > img {
+        width: auto;
+        height: 60%;
+        align-self: center;
+    }
     section {
         display: flex;
         flex-direction: row;
