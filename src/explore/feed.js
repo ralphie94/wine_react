@@ -5,7 +5,7 @@ import styled, {css} from 'styled-components'
 const Feed = (props)=>{
     const feedPosts = props.posts.map(post=>{
         return (
-            <div className="single-post">
+            <div key={post.id} className="single-post">
                 <img src={post.img}/>
                 <p>{post.wine}</p>
                 <p>vintage:{post.vintage}</p>

@@ -8,7 +8,7 @@ const Modal = styled.div`
     }
     .show-modal {
         height: 100vh;
-        width: 100%;
+        width: 100vw;
         background-color: rgba(0, 0, 0, 0.7);
         display: flex;
         align-items: center;

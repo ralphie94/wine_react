@@ -11,16 +11,26 @@ const ExplorePage = styled.div`
     background-repeat: no-repeat;
     height: 100vh;
     color: white;
+    display:flex;
+    justify-content: center;
 
     .entire-feed{
         position: absolute;
         z-index: 1;
         display: flex;
         flex-direction: column;
+        align-content: center;
+        height: 80vh;
+        width: 80vw;
     }
     .feed-posts{
         display: flex;
-        overflow-y: scroll
+        overflow-y: scroll;
+        justify-content: space-evenly
+
+    }
+    .single-post{
+
     }
 `
 class Explore extends Component{
@@ -96,7 +106,6 @@ class Explore extends Component{
                 <div className="entire-feed">
                     <h1>Explore</h1>
                     <button onClick={this.showModal}>New Post</button>
-                    posts will populate below...
                     <Feed posts={this.state.posts}/>
                 </div>
                     <NewPost show={this.state.showModal}>
