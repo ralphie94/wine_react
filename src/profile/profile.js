@@ -1,5 +1,6 @@
 import React, { Component} from "react";
 import EditModal from "./editmodal"
+import { withRouter } from "react-router-dom";
 
 class Profile extends Component {
     state = {
@@ -27,6 +28,14 @@ class Profile extends Component {
         // this.props.logged(updateUserJson.updateUser)
     }
 
+    deleteUser = async () => {
+        const removeUser = await fetch(`http://localhost:8000/users/${this.props.user.id}`, {
+            method: "DELETE"
+        })
+        const removeUserJson = await removeUser.json();
+        this.props.history.push('/')
+    }
+
     showModal = () => {
         this.setState({
             showModal: true
@@ -50,6 +59,7 @@ class Profile extends Component {
                         <input type="text" name="username" placeholder="Username" className="inputbox" onChange={this.handleChange}></input><br/>
                         <input type="password" name="password" placeholder="Password" className="inputbox" onChange={this.handleChange}></input><br/>
                         <button type="submit" className="btn" onSubmit={(e) => this.updateUser(e)}>Save Changes</button>
+                        <button className="btn" onClick={this.deleteUser}>Delete User</button>
                         <button onClick={this.hideModal} className="btn">Close</button>
                     </form>
                 </EditModal>
@@ -58,4 +68,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
+export default withRouter(Profile);
