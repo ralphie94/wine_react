@@ -56,9 +56,11 @@ class Navbar extends Component {
                 <h1>Wine <span>Post</span></h1>
                 <div className="links">
                     <Link to={routes.HOME} className="nav-link">Home</Link>
-                    <Link className="nav-link">Logout</Link>
-                    <Link to={routes.LOGIN} className="nav-link">Login</Link>
-                    <Link to={routes.REGISTER} className="nav-link">Register</Link>
+                    { this.props.logged && <Link className="nav-link">Logout</Link>}                                       
+                    {!this.props.logged && <Link to={routes.LOGIN} className="nav-link">Login</Link>}
+                    {!this.props.logged && <Link to={routes.REGISTER} className="nav-link">Register</Link>}
+                       
+                                    
                 </div>
             </NavStyle>
         )
