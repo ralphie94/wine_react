@@ -13,24 +13,77 @@ const ExplorePage = styled.div`
     color: white;
     display:flex;
     justify-content: center;
-
+    
     .entire-feed{
+        background-color: rgba(64, 49, 33, 0.6);
         position: absolute;
         z-index: 1;
         display: flex;
         flex-direction: column;
         align-content: center;
-        height: 80vh;
+        justify-content: center;
+        height: 85vh;
         width: 80vw;
+        padding-top: 25px;
     }
     .feed-posts{
         display: flex;
         overflow-y: scroll;
-        justify-content: space-evenly
-
+        justify-content: space-evenly;
+        margin-top: 30px;
     }
     .single-post{
+        background-color: rgb(203,190,181);
+        color: rgb(64, 49, 33);
+        height: 45vh;
+        width: 16vw;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
 
+    }
+    .single-post > img {
+        width: 190px;
+        height: 180px;
+        align-self: center;
+    }
+    .single-post-comment {
+        margin-top: 15px;
+    }
+    button{
+        border-radius: 4px;
+        font-size: 20px;
+        color: white;
+        border: 1px solid white;
+        /* background-color: rgba(64, 49, 33, 0.7); */
+        padding: 5px;
+        text-align: center;
+        background-color: transparent;
+        width: 8vw;
+        margin: 6px;
+
+    }
+    button:hover{
+        /* color: rgba(52, 66, 38, 1);
+        background-color: rgba(131,165,97, 0.8);*/
+        border: 2px solid #5a0032; 
+        color: #5a0032;
+        background-color: white;
+
+    }
+    h1, button{
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+
+    }
+    .modal-buttons{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    h1 {
+        color: white;
     }
 `
 class Explore extends Component{
@@ -112,19 +165,21 @@ class Explore extends Component{
                         <div className="post-preview">
                             <p>preview</p>
                             <img src={this.state.img}/>
-                            <p>wine:{this.state.wine}</p>
+                            <p>{this.state.wine}</p>
                             <p>vintage:{this.state.vintage}</p>
                             <p>{this.state.posted_by}: {this.state.comment}</p>
                         </div>
                         <div className='post-info'>
                             <form onSubmit={this.preventDefault}>
-                                <input type='text' name='img' placeholder="upload an image" value={this.state.img} onChange={this.handleChange}/>
-                                <input type='text' name='wine' placeholder="wine" value={this.state.wine} onChange={this.handleChange}/>
-                                <input type='text' name='vintage' placeholder="vintage" value={this.state.vintage} onChange={this.handleChange}/>
-                                <input type='text' name='comment' placeholder="comment" value={this.state.comment} onChange={this.handleChange}/>
-                                <button onClick={this.createPost}>Post</button>
-                                <button onClick={this.hideModal}>Cancel</button>
+                                <span>Upload Image:</span><input type='file' name='img' onChange={this.handleChange}/>
+                                <span>Wine:</span><input className="input" type='text' name='wine' value={this.state.wine} onChange={this.handleChange}/>
+                                <span>Vintage:</span><input className="input" type='text' name='vintage' value={this.state.vintage} onChange={this.handleChange}/>
+                                <span>Comments:</span><input className="input" type='text' name='comment' value={this.state.comment} onChange={this.handleChange}/>
                             </form>
+                            <div className="modal-buttons">
+                                <button onClick={this.createPost} >Post</button>
+                                <button onClick={this.hideModal} >Cancel</button>
+                            </div>    
                         </div>
                     </NewPost>
             </ExplorePage>

@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import './register.css'
 
 const RegisterStyle = styled.div`
-    background-color: rgb(90 0 50);
+    background-color: rgb(56 0 0);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,15 +29,16 @@ const RegisterStyle = styled.div`
         font-size: 20px;
         color: white;
         border: 1px solid white;
-        background-color: #5a0032;
+        background-color: transparent;
         float: right;
         padding: 5px;
     }
     button:hover{
-        
+        color: #5a0032;
+        background-color: white;
     }
     h1{
-        font-size: 50px;
+        font-size: 40px;
         color: white;
     }
 `

@@ -3,7 +3,7 @@ import {Redirect, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 const LoginStyle = styled.div`
-    background-color: rgb(90 0 50);
+    background-color: rgb(56 0 0);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,6 +16,8 @@ const LoginStyle = styled.div`
         border: transparent;
         background-color: rgba(255, 255, 255, 0.2);
         display: flex;
+        padding: 4px;
+        color: white;
     }
     span{
         color: white;
@@ -25,8 +27,13 @@ const LoginStyle = styled.div`
         font-size: 20px;
         color: white;
         border: 1px solid white;
-        background-color: #5a0032;
+        background-color: transparent;
         float: right;
+        padding: 5px;
+    }
+    button:hover{
+        color: #5a0032;
+        background-color: white;
     }
     h1{
         font-size: 50px;

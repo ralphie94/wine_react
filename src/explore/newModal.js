@@ -20,7 +20,7 @@ const Modal = styled.div`
         width: 220px;
         height: 280px;
         border: 1px solid white;
-        background-color: #c6a4a8;
+        background-color: rgb(203,190,181);
         overflow-y: scroll;
         overflow-x: hidden;
     }
@@ -28,20 +28,38 @@ const Modal = styled.div`
         display: flex;
         flex-direction: row;
     }
+    .input{
+        height: 20px;
+        width: 40vh;
+        border-radius: 1vh;
+        font-size: 20px;
+        border: transparent;
+        background-color: rgba(255, 255, 255, 0.2);
+        display: flex;
+        padding: 4px;
+        color: white;
+        margin: 0px 0;
+    }
+    span{
+        color: white;
+        width: 15vw;
+        margin: 5px;
+        align-self: flex-start;
+    }
     .post-info {
-        width: 500px;
+        width: 350px;
         height: 280px;
-        background-color: white;
+        background-color: rgb(90 0 50);
         margin-left: 15px;
+        border-radius: 5px;
+        border: 2px solid #cbbeb5;
+        
     }
     form {
         display: flex;
         flex-direction: column;
-    }
-    input {
-        border-radius: 4px;
-        font-size: 20px;
-        margin: 10px 30px;
+        align-items: center;
+        margin-top: 5px;
     }
     img {
         width: 190px;
