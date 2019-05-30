@@ -23,6 +23,8 @@ const NavStyle = styled.div`
     }
     h1 {
         justify-content: center;
+        font-family: 'Nanum Myeongjo', serif;
+        font-size: 30px;
     }
     .links{
         justify-content: flex-end;
@@ -53,7 +55,7 @@ class Navbar extends Component {
                     this.props.logged && <Link to={routes.FEED} className="nav-link">Feed</Link>
                 }
                 </div>
-                <h1>Wine <span>Post</span></h1>
+                <h1>Wine <span> Post</span></h1>
                 <div className="links">
                     <Link to={routes.HOME} className="nav-link">Home</Link>                            
                     {this.props.logged && <Link to={routes.LOGOUT}className="nav-link">Logout</Link>}

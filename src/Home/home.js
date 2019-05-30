@@ -23,6 +23,10 @@ const HomePage = styled.div`
 
     h1 {
         text-align: center;
+        font-family: 'Nanum Myeongjo', serif;
+        font-size: 30px;
+        margin-top: -65px;
+        color: white;
     }
 
     span{
@@ -32,16 +36,18 @@ const HomePage = styled.div`
     p{
         font-size: 30px;
         text-align: center;
-        margin-top: 45px;
+        margin-top: 90px;
     }
 
     .verify{
-        width: 55px;
-        height: 40px;
+        width: 75px;
+        height: 50px;
         border-radius: 5px;
         font-size: 15px;
         background-color: rgb(90 0 50);
         color: white;
+        margin-left: 65px;
+        margin-top: 30px;
     }
 
 `
@@ -69,6 +75,7 @@ class Home extends Component {
     
     render(){
         return (
+
             <HomePage>
                 <HomeModal show={this.state.showModal}>
                     <div className="agecheck">
@@ -79,7 +86,7 @@ class Home extends Component {
                     </div>
                 </HomeModal>
             </HomePage>
-
+            
         )
     }
 }

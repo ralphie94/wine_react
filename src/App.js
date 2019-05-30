@@ -79,7 +79,7 @@ class App extends Component {
       <Switch>
         <Route exact path={routes.REGISTER} render={() => <Register handleRegister={this.handleRegister} logged={this.state.logged}/>} />
         <Route exact path={routes.LOGIN} render={() => <Login login={this.handleLogin} logged={this.state.logged}/>}/>
-        <Route exact path={routes.HOME} render ={() => <Home />}/>
+        <Route exact path={routes.HOME} render ={() => <Home logged={this.state.logged}/>}/>
         <Route exact path={routes.EXPLORE} render ={()=> <Explore user={this.state.currentUser}/>} />
         <Route exact path={routes.PROFILE} render ={() => <Profile logged={this.state.logged} user={this.state.currentUser} deleteLogout={this.deleteLogout} />}/>
         {/* <Route exact path={routes.FEED} render ={() => <Feed />}/> */}
