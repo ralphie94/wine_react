@@ -207,12 +207,12 @@ class Profile extends Component {
                           <button onClick={this.hideModal} className="btn">Close</button>
                         </form>
                     </EditModal>
-                    <EditPost>
+                    {/* <EditPost>
 
                     </EditPost>
                     <Ays>
                         
-                    </Ays>
+                    </Ays> */}
             </ProfilePage>
         )
     }
