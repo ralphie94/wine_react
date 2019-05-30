@@ -3,6 +3,46 @@ import styled from 'styled-components';
 import { Redirect } from "react-router-dom";
 import './register.css'
 
+const RegisterStyle = styled.div`
+    background-color: rgb(56 0 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    input{
+        height: 5vh;
+        width: 40vh;
+        border-radius: 1vh;
+        font-size: 20px;
+        border: transparent;
+        background-color: rgba(255, 255, 255, 0.2);
+        display: flex;
+        padding: 4px;
+        color: white;
+    }
+    span{
+        color: white;
+    }
+    button{
+        border-radius: 4px;
+        font-size: 20px;
+        color: white;
+        border: 1px solid white;
+        background-color: transparent;
+        float: right;
+        padding: 5px;
+    }
+    button:hover{
+        color: #5a0032;
+        background-color: white;
+    }
+    h1{
+        font-size: 40px;
+        color: white;
+    }
+`
+
 class Register extends Component {
     state = {
         username: "",
@@ -38,14 +78,15 @@ class Register extends Component {
     }
 }
 const RegisterForm = ({handleChange, handleSubmit, username, password, verify_password}) => 
-
-<form onSubmit={e => handleSubmit(e)} className='loginforms'>
-<h1>Register</h1>
-    <input type='text' name='username' placeholder='Username' className='inputbox' onChange={handleChange} value={username}/><br/>
-    <input type='password' name='password' placeholder='Password' className='inputbox' onChange={handleChange} value={password}/><br/>
-    <input type='password' name='verify_password' placeholder='Verify Password' className='inputbox' onChange={handleChange} value={verify_password}/><br/>
-    <button type='submit' className='btn'>Register</button>
-</form>
+<RegisterStyle>
+    <h1>Create an Account</h1>
+    <form onSubmit={e => handleSubmit(e)}>
+        <span>Username:</span><input type='text' name='username' onChange={handleChange} value={username}/><br/>
+        <span>Password:</span><input type='password' name='password' onChange={handleChange} value={password}/><br/>
+        <span>Verify Password:</span><input type='password' name='verify_password' onChange={handleChange} value={verify_password}/><br/>
+        <button type='submit'>Register</button>
+    </form>
+</RegisterStyle>
 
 
 export default Register;

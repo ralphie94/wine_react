@@ -8,10 +8,10 @@ import styled, {css} from "styled-components";
 // import "./navbar.css"
 
 const NavStyle = styled.div`
-    background-color: rgb(90, 0, 50);
-    height: 80px;
+    background-color: rgb(56, 0, 0);
+    height: 70px;
     display: flex;
-    /* position: fixed; */
+    position: fixed;
     z-index: 10;
     width: 100%;
     border-bottom: 10px solid white;
