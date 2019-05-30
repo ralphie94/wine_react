@@ -14,16 +14,17 @@ class Profile extends Component {
     }
     updateUser = async (e) => {
         e.preventDefault();
-        const updatedUser = await fetch("http://localhost:8000/users", {
+        const updatedUser = await fetch(`http://localhost:8000/users/${this.props.user.id}`, {
             method: "PUT",
             credentials: "include",
-            body: JSON.stringify({ username: this.state.username, password: this.state.password }),
+            body: JSON.stringify(this.state),
             headers: {
                 "Content-Type": "application/json"
             }
         })
         const updateUserJson = await updatedUser.json();
-        this.props.logged(updateUserJson.updateUser)
+        console.log(updateUserJson)
+        // this.props.logged(updateUserJson.updateUser)
     }
 
     showModal = () => {
@@ -46,9 +47,9 @@ class Profile extends Component {
                 <EditModal show={this.state.showModal}>
                     <h1>Edit Info</h1>
                     <form onSubmit={(e) => this.updateUser(e)}>
-                        <input type="text" name="username" placeholder="Username" className="inputbox"></input><br/>
-                        <input type="password" name="password" placeholder="Password" className="inputbox"></input><br/>
-                        <button type="submit" className="btn">Save Changes</button>
+                        <input type="text" name="username" placeholder="Username" className="inputbox" onChange={this.handleChange}></input><br/>
+                        <input type="password" name="password" placeholder="Password" className="inputbox" onChange={this.handleChange}></input><br/>
+                        <button type="submit" className="btn" onSubmit={(e) => this.updateUser(e)}>Save Changes</button>
                         <button onClick={this.hideModal} className="btn">Close</button>
                     </form>
                 </EditModal>
