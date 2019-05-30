@@ -30,7 +30,8 @@ class App extends Component {
       console.log(response, 'from the flask server');
       if(response.message = 'success'){
         this.setState({
-          logged: true
+          logged: true,
+          currentUser: response.user
         })
       } 
 
@@ -54,7 +55,7 @@ class App extends Component {
       if(parsedData.message === 'success'){
         this.setState({
           logged: true,
-          currentUser: parsedData.user.username
+          currentUser: parsedData.user
 
         })
       }
@@ -73,7 +74,7 @@ class App extends Component {
         <Route exact path={routes.LOGIN} render={() => <Login login={this.handleLogin} logged={this.state.logged}/>}/>
         <Route exact path={routes.HOME} render ={() => <Home />}/>
         <Route exact path={routes.EXPLORE} render ={()=> <Explore user={this.state.currentUser}/>} />
-        <Route exact path={routes.PROFILE} render ={() => <Profile logged={this.state.logged}/>}/>
+        <Route exact path={routes.PROFILE} render ={() => <Profile logged={this.state.logged} user={this.state.currentUser}/>}/>
         {/* <Route exact path={routes.FEED} render ={() => <Feed />}/> */}
       </Switch>
       </div>

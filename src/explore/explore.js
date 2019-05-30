@@ -31,7 +31,7 @@ class Explore extends Component{
         wine: '',
         vintage: '',
         comment: '',
-        posted_by: this.props.user
+        posted_by: this.props.user.username
     }
     preventDefault = (e)=>{
         e.preventDefault();

@@ -41,7 +41,7 @@ class Profile extends Component {
     render(){
         return(
             <div>
-                <h1>User Profile</h1>
+                <h1>{this.props.user.username}</h1>
                 <button onClick={this.showModal}>Edit</button>
                 <EditModal show={this.state.showModal}>
                     <h1>Edit Info</h1>
