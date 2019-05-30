@@ -1,6 +1,7 @@
 import React, { Component} from "react";
 import EditModal from "./editmodal"
 import styled from 'styled-components';
+import { withRouter } from "react-router-dom";
 
 const ProfilePage = styled.div`
     background-image: url("imgs/winecellar.jpg");
@@ -85,6 +86,27 @@ class Profile extends Component {
         // this.props.logged(updateUserJson.updateUser)
     }
 
+    deleteUser = async (e) => {
+        e.preventDefault()
+       try{
+        const removeUser = await fetch(`http://localhost:8000/users/${this.props.user.id}`, {
+            method: "DELETE",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        const removeUserJson = await removeUser.json();
+        console.log(removeUserJson)
+        this.props.history.push('/')
+        if(removeUserJson.deleted){
+            this.props.deleteLogout()
+        }
+       } catch(err){
+           console.log(err);
+       }
+    }
+
     showModal = () => {
         this.setState({
             showModal: true
@@ -109,10 +131,11 @@ class Profile extends Component {
                     <div>PERSONAL FEED</div>
                     <EditModal show={this.state.showModal}>
                         <h1>Edit Info</h1>
-                        <form onSubmit={(e) => this.updateUser(e)}>
+                        <form>
                           <input type="text" name="username" placeholder="Username" className="inputbox" onChange={this.handleChange}></input><br/>
                           <input type="password" name="password" placeholder="Password" className="inputbox" onChange={this.handleChange}></input><br/>
-                          <button type="submit" className="btn" onSubmit={(e) => this.updateUser(e)}>Save Changes</button>
+                          <button type="submit" className="btn" onClick={(e) => this.updateUser(e)}>Save Changes</button>
+                          <button className="btn" onClick={(e)=>this.deleteUser(e)}>Delete User</button>
                           <button onClick={this.hideModal} className="btn">Close</button>
                         </form>
                     </EditModal>
@@ -123,4 +146,4 @@ class Profile extends Component {
 }
 
 
-export default Profile;
+export default withRouter(Profile);

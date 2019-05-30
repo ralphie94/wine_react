@@ -28,7 +28,7 @@ class App extends Component {
 
       const response = await registerCall.json()
       console.log(response, 'from the flask server');
-      if(response.message = 'success'){
+      if(response.register){
         this.setState({
           logged: true,
           currentUser: response.user
@@ -64,6 +64,13 @@ class App extends Component {
       console.log(error)
     }
   }
+  
+  deleteLogout = ()=>{
+    this.setState({
+      logged: false,
+      currentUser: null
+    })
+  }
 
   render(){
     return (
@@ -74,7 +81,7 @@ class App extends Component {
         <Route exact path={routes.LOGIN} render={() => <Login login={this.handleLogin} logged={this.state.logged}/>}/>
         <Route exact path={routes.HOME} render ={() => <Home />}/>
         <Route exact path={routes.EXPLORE} render ={()=> <Explore user={this.state.currentUser}/>} />
-        <Route exact path={routes.PROFILE} render ={() => <Profile logged={this.state.logged} user={this.state.currentUser}/>}/>
+        <Route exact path={routes.PROFILE} render ={() => <Profile logged={this.state.logged} user={this.state.currentUser} deleteLogout={this.deleteLogout} />}/>
         {/* <Route exact path={routes.FEED} render ={() => <Feed />}/> */}
       </Switch>
       </div>
