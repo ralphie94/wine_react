@@ -24,27 +24,28 @@ const ExplorePage = styled.div`
         justify-content: center;
         height: 85vh;
         width: 80vw;
-        padding-top: 25px;
+        padding-top: 75px;
     }
     .feed-posts{
         display: flex;
         overflow-y: scroll;
         justify-content: space-evenly;
+        flex-wrap: wrap;
         margin-top: 30px;
     }
     .single-post{
         background-color: rgb(203,190,181);
         color: rgb(64, 49, 33);
-        height: 45vh;
-        width: 16vw;
+        height: 50vh;
+        width: auto;
         display: flex;
         flex-direction: column;
         padding: 10px;
-
+        margin: 10px;
     }
     .single-post > img {
-        width: 190px;
-        height: 180px;
+        width: auto;
+        height: 60%;
         align-self: center;
     }
     .single-post-comment {
@@ -94,7 +95,8 @@ class Explore extends Component{
         wine: '',
         vintage: '',
         comment: '',
-        posted_by: this.props.user.username
+        user: this.props.user.username,
+        posted_by: this.props.user.id
     }
     preventDefault = (e)=>{
         e.preventDefault();
@@ -167,14 +169,14 @@ class Explore extends Component{
                             <img src={this.state.img}/>
                             <p>{this.state.wine}</p>
                             <p>vintage:{this.state.vintage}</p>
-                            <p>{this.state.posted_by}: {this.state.comment}</p>
+                            <p>@{this.state.user}: {this.state.comment}</p>
                         </div>
                         <div className='post-info'>
                             <form onSubmit={this.preventDefault}>
-                                <span>Upload Image:</span><input type='file' name='img' onChange={this.handleChange}/>
+                                <span>Upload Image:</span><input type='text' className="input" name='img' onChange={this.handleChange}/>
                                 <span>Wine:</span><input className="input" type='text' name='wine' value={this.state.wine} onChange={this.handleChange}/>
                                 <span>Vintage:</span><input className="input" type='text' name='vintage' value={this.state.vintage} onChange={this.handleChange}/>
-                                <span>Comments:</span><input className="input" type='text' name='comment' value={this.state.comment} onChange={this.handleChange}/>
+                                <span>Comments:</span><input className="input" type='text' name='comment' maxLength='200' value={this.state.comment} onChange={this.handleChange}/>
                             </form>
                             <div className="modal-buttons">
                                 <button onClick={this.createPost} >Post</button>
