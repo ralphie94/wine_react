@@ -4,7 +4,7 @@ import EditModal from "./editmodal"
 class Profile extends Component {
     state = {
         username: "",
-        password: "",
+        password: null,
         showModal: false,
     }
     handleChange = (e) => {
