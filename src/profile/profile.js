@@ -1,8 +1,11 @@
 import React, { Component} from "react";
 import EditModal from "./editmodal"
 import styled from 'styled-components';
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter} from "react-router-dom";
 import Feed from './feed';
+import EditPostModal from './editPost';
+import Ays from './aysmodal';
+// import { async } from "q";
 
 const ProfilePage = styled.div`
     background-image: url("imgs/winecellar.jpg");
@@ -35,7 +38,7 @@ const ProfilePage = styled.div`
     }
     button{
         border-radius: 4px;
-        font-size: 20px;
+        font-size: 16px;
         color: white;
         border: 1px solid white;
         /* background-color: rgba(64, 49, 33, 0.7); */
@@ -47,12 +50,14 @@ const ProfilePage = styled.div`
 
     }
     button:hover{
-        border: 2px solid white; 
-        color: white;
-        background-color: #5a0032;
+        border: 2px solid rgb(56, 0, 0); 
+        color: rgb(56, 0, 0);
+        background-color: white;
     }
-    h1 {
+    h1, .edit-profile {
         color: white;
+        align-self: center;
+        margin: 10px 0;
     }
     .feed-posts{
         display: flex;
@@ -92,7 +97,7 @@ const ProfilePage = styled.div`
         margin: 6px;
 
     }
-    .small-button:hover{
+    .small-button:hover, .edit-profile:hover{
         /* color: rgba(52, 66, 38, 1);
         background-color: rgba(131,165,97, 0.8);*/
         border: 2px solid white; 
@@ -104,15 +109,26 @@ const ProfilePage = styled.div`
         display: flex;
         align-self: flex-end;
     }
+    .modal-buttons{
+        display: flex;
+        justify-content: center;   
+    }
 `
 
 
 class Profile extends Component {
     state = {
-        username: "",
-        password: null,
+        username: this.props.user.username,
+        password: '',
         showModal: false,
-        userPosts: []
+        showPostModal: false,
+        aysmodal: false,
+        userPosts: [],
+        img: '',
+        wine: '',
+        vintage: '',
+        comment: '',
+        postId: '',
     }
     handleChange = (e) => {
         this.setState({
@@ -121,7 +137,7 @@ class Profile extends Component {
     }
     updateUser = async (e) => {
         e.preventDefault();
-        const updatedUser = await fetch(`http://localhost:8000/users/${this.props.user.id}`, {
+        const data = await fetch(`http://localhost:8000/users/${this.props.user.id}`, {
             method: "PUT",
             credentials: "include",
             body: JSON.stringify(this.state),
@@ -129,8 +145,11 @@ class Profile extends Component {
                 "Content-Type": "application/json"
             }
         })
-        const updateUserJson = await updatedUser.json();
-        console.log(updateUserJson)
+        const parsedData = await data.json();
+        this.props.updateCurrentUser(parsedData);
+        this.setState({
+            showModal: false
+        })
         // this.props.logged(updateUserJson.updateUser)
     }
 
@@ -155,17 +174,18 @@ class Profile extends Component {
        }
     }
 
-    showModal = () => {
+    showModal = (e) => {
         this.setState({
-            showModal: true
+            [e.target.name]: true
         })
     }
 
-    hideModal = () => {
+    hideModal = (e) => {
         this.setState({
-            showModal: false
+            [e.target.name]: false
         })
     }
+
     getPosts = async ()=>{
         try {
             const data = await fetch(`http://localhost:8000/wine/userposts/${this.props.user.id}`, {
@@ -186,34 +206,132 @@ class Profile extends Component {
             })
         })
     }
+
+    getOnePost = async (key)=>{
+        console.log(key)
+        try {
+            const post = await fetch(`http://localhost:8000/wine/posts/${key}`, {
+                credentials:'include'
+            })
+            const parsedPost = await post.json();
+            console.log(parsedPost)
+            this.setState({
+                postId: key,
+                img: parsedPost.img,
+                wine: parsedPost.wine,
+                vintage: parsedPost.vintage,
+                comment: parsedPost.comment,
+                showPostModal: true
+            })
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    postForDelete = (key)=>{
+        console.log(key)
+        this.setState({
+            postId: key,
+            aysModal: true
+        })
+    }
+    updatePost = async()=>{
+        try {
+            const data = await fetch(`http://localhost:8000/wine/posts/${this.state.postId}`, {
+                method: "PUT",
+                credentials: "include",
+                body: JSON.stringify(this.state),
+                headers: {
+                    "Content-Type": "application/json"
+                }               
+            })
+            const parsedData = await data.json();            
+            this.getPosts().then(data=>{
+                this.setState({
+                    userPosts: data,
+                    showPostModal: false
+                })
+            })
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    deletePost = async()=>{
+        try {
+            const data = await fetch(`http://localhost:8000/wine/posts/${this.state.postId}`, {
+                method: "DELETE",
+                credentials: "include",
+            })
+            this.getPosts().then(data=>{
+                this.setState({
+                    userPosts: data,
+                    aysModal: false
+                })
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
     render(){
         return(
-            <ProfilePage>
+            this.props.logged
+            ? <ProfilePage>
                 <div className="profile-main">
                     <h1>YOUR CELLAR</h1>
-                    <button onClick={this.showModal}>Edit Profile</button>
+                    <button onClick={(e)=>this.showModal(e)} name="showModal" className="edit-profile">Edit Profile</button>
                     <div className="top-five">
                         <h3>TOP 5</h3>
                     </div>
-                    <Feed posts={this.state.userPosts} />
+                    <Feed posts={this.state.userPosts} username={this.state.username} getOnePost={this.getOnePost} postForDelete={this.postForDelete}/>
                 </div>
-                    <EditModal show={this.state.showModal}>
-                        <h1>Edit Info</h1>
+                <EditModal show={this.state.showModal}>
+                    <div className="edit-box">
+                        <button onClick={(e)=>this.hideModal(e)} name="showModal" className="x-button">X</button>
+                        <h1>Edit Profile</h1>
                         <form>
-                          <input type="text" name="username" placeholder="Username" className="inputbox" onChange={this.handleChange}></input><br/>
-                          <input type="password" name="password" placeholder="Password" className="inputbox" onChange={this.handleChange}></input><br/>
-                          <button type="submit" className="btn" onClick={(e) => this.updateUser(e)}>Save Changes</button>
-                          <button className="btn" onClick={(e)=>this.deleteUser(e)}>Delete User</button>
-                          <button onClick={this.hideModal} className="btn">Close</button>
+                            <span>Change Username:</span><input type="text" name="username" className="input" value={this.state.username} onChange={this.handleChange}></input><br/>
+                            <span>Change Password:</span><input type="password" name="password" className="input" onChange={this.handleChange}></input><br/>
+                            <div className='modal-buttons'>
+                                <button onClick={(e)=>this.updateUser(e)}>Save Changes</button>
+                                <button onClick={(e)=>this.deleteUser(e)}>Delete Account</button>
+                            </div>
                         </form>
-                    </EditModal>
-                    {/* <EditPost>
-
-                    </EditPost>
-                    <Ays>
-                        
-                    </Ays> */}
+                    </div>
+                </EditModal>
+                <EditPostModal show={this.state.showPostModal}>
+                    <div className="post-preview">
+                        <p>preview</p>
+                        <img src={this.state.img}/>
+                        <p>{this.state.wine}</p>
+                        <p>vintage:{this.state.vintage}</p>
+                        <p>@{this.state.user}: {this.state.comment}</p>
+                    </div>
+                    <div className='post-info'>
+                        <form onSubmit={this.preventDefault}>
+                            {/* <span>Upload Image:</span><input type='text' className="input" name='img' onChange={this.handleChange}/> */}
+                            <span>Wine:</span><input className="input" type='text' name='wine' value={this.state.wine} onChange={this.handleChange}/>
+                            <span>Vintage:</span><input className="input" type='text' name='vintage' value={this.state.vintage} onChange={this.handleChange}/>
+                            <span>Comments:</span><input className="input" type='text' name='comment' maxLength='200' value={this.state.comment} onChange={this.handleChange}/>
+                        </form>
+                        <div className="modal-buttons">
+                            <button onClick={this.updatePost}>Save Changes</button>
+                            <button onClick={(e)=>this.hideModal(e)} name="showPostModal">Cancel</button>
+                        </div>    
+                    </div>
+                </EditPostModal>
+                <Ays show={this.state.aysModal}>
+                    <div className="ays-box">
+                        <button onClick={(e)=>this.hideModal(e)} name="aysModal" className="x-button">X</button>
+                        <h1>Are you sure you would like to delete this post?</h1>
+                            <div className='modal-buttons'>
+                                <button onClick={this.deletePost}>yes</button>
+                                <button onClick={(e)=>this.hideModal(e)} name="aysModal">no</button>
+                            </div>
+                    </div>
+                </Ays>
             </ProfilePage>
+            : <Redirect to="/"/>
         )
     }
 }

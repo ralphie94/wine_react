@@ -72,6 +72,14 @@ class App extends Component {
     })
   }
 
+  updateCurrentUser = (info)=>{
+    this.setState({
+      currentUser: info
+    })
+    console.log(this.state.currentUser)
+  }
+
+
   render(){
     return (
       <div className="App">
@@ -81,7 +89,7 @@ class App extends Component {
         <Route exact path={routes.LOGIN} render={() => <Login login={this.handleLogin} logged={this.state.logged}/>}/>
         <Route exact path={routes.HOME} render ={() => <Home logged={this.state.logged}/>}/>
         <Route exact path={routes.EXPLORE} render ={()=> <Explore user={this.state.currentUser}/>} />
-        <Route exact path={routes.PROFILE} render ={() => <Profile logged={this.state.logged} user={this.state.currentUser} deleteLogout={this.deleteLogout} />}/>
+        <Route exact path={routes.PROFILE} render ={() => <Profile logged={this.state.logged} user={this.state.currentUser} deleteLogout={this.deleteLogout} updateCurrentUser={this.updateCurrentUser} />}/>
         {/* <Route exact path={routes.FEED} render ={() => <Feed />}/> */}
       </Switch>
       </div>

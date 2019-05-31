@@ -147,8 +147,11 @@ class Explore extends Component{
                 }
             })
             const parsedData = await data.json()
-            this.setState({
-                showModal: false
+            this.getPosts().then(data=>{
+                this.setState({
+                    posts: data,
+                    showModal: false
+                })
             })
             console.log(parsedData)
         } catch (error) {
@@ -172,7 +175,7 @@ class Explore extends Component{
                             <p>@{this.state.user}: {this.state.comment}</p>
                         </div>
                         <div className='post-info'>
-                            <form onSubmit={this.preventDefault}>
+                           <form onSubmit={this.preventDefault}>
                                 <span>Upload Image:</span><input type='text' className="input" name='img' onChange={this.handleChange}/>
                                 <span>Wine:</span><input className="input" type='text' name='wine' value={this.state.wine} onChange={this.handleChange}/>
                                 <span>Vintage:</span><input className="input" type='text' name='vintage' value={this.state.vintage} onChange={this.handleChange}/>

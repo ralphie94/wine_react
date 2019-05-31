@@ -75,9 +75,10 @@ class Home extends Component {
     
     render(){
         return (
-
             <HomePage>
-                <HomeModal show={this.state.showModal}>
+                {
+                !this.props.logged
+                && <HomeModal show={this.state.showModal}>
                     <div className="agecheck">
                         <h1>Wine <span> Post</span></h1>
                         <p>Must be 21+ to enter. Please verify if you are over 21.</p>
@@ -85,6 +86,7 @@ class Home extends Component {
                         <button className="verify" onClick={this.handleSubmit}>No</button>
                     </div>
                 </HomeModal>
+                }
             </HomePage>
             
         )

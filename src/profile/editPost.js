@@ -75,7 +75,7 @@ const Modal = styled.div`
     }
 `
 
-const NewPost = ({show, children})=>{
+const EditPost = ({show, children})=>{
     const showOrHide = show ? 'show-modal' : 'hide-modal'
     return(
         <Modal>
@@ -88,4 +88,4 @@ const NewPost = ({show, children})=>{
     )
 }
 
-export default NewPost;
+export default EditPost;

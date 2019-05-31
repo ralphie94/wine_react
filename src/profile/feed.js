@@ -8,10 +8,10 @@ const Feed = (props)=>{
                 <img src={post.img}/>
                 <p>{post.wine}</p>
                 <p>Vintage:{post.vintage}</p>
-                <p className="single-post-comment">@{post.user}: {post.comment}</p>
+                <p className="single-post-comment">@{props.username}: {post.comment}</p>
                 <div className="edit-buttons"> 
-                    <button className="small-button">Edit</button>
-                    <button className="small-button">Delete</button>
+                    <button className="small-button" onClick={()=>props.getOnePost(post.id)} >Edit</button>
+                    <button className="small-button" onClick={()=>props.postForDelete(post.id)} >Delete</button>
                 </div>
             </div>
         )
