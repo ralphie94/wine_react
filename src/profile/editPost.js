@@ -19,7 +19,7 @@ const Modal = styled.div`
     .post-preview {
         padding: 10px;
         color: rgb(64, 49, 33);
-        width: 20vw;
+        width: auto;
         height: 50vh;
         /* width: 220px;
         height: 280px; */
@@ -30,8 +30,9 @@ const Modal = styled.div`
     }
     img {
         width: auto;
-        height: 60%;
+        height: 57%;
         align-self: center;
+        margin: 6px;
     }
     section {
         display: flex;
@@ -44,9 +45,10 @@ const Modal = styled.div`
         margin-left: 15px;
         border-radius: 5px;
         border: 2px solid #cbbeb5;
+        padding: 20px
     }
     .input{
-        height: 20px;
+        height: auto;
         width: 40vh;
         border-radius: 1vh;
         font-size: 20px;
@@ -67,11 +69,8 @@ const Modal = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         margin-top: 5px;
-    }
-    img {
-        width: 190px;
-        height: 180px;
     }
 `
 

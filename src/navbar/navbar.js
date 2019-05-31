@@ -16,15 +16,16 @@ const NavStyle = styled.div`
     width: 100%;
     border-bottom: 10px solid white;
     .nav-link, h1 {
-        font-size: 20px;
+        font-size: 21px;
         color: white;
         text-decoration: none;
         padding: 0 20px;
+        font-family: 'Josefin Slab', serif;
     }
     h1 {
         justify-content: center;
-        font-family: 'Nanum Myeongjo', serif;
-        font-size: 30px;
+        font-family: 'Raleway', sans-serif;
+        font-size: 25px;
     }
     .links{
         justify-content: flex-end;

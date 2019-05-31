@@ -42,6 +42,7 @@ const ExplorePage = styled.div`
         flex-direction: column;
         padding: 10px;
         margin: 10px;
+        border-radius: 4px;
     }
     .single-post > img {
         width: auto;
@@ -60,7 +61,7 @@ const ExplorePage = styled.div`
         padding: 5px;
         text-align: center;
         background-color: transparent;
-        width: 8vw;
+        width: 8.5vw;
         margin: 6px;
 
     }
@@ -76,7 +77,7 @@ const ExplorePage = styled.div`
         display: flex;
         flex-direction: column;
         align-self: center;
-
+        font-family: 'Raleway', sans-serif;
     }
     .modal-buttons{
         display: flex;
@@ -85,6 +86,12 @@ const ExplorePage = styled.div`
     }
     h1 {
         color: white;
+    }
+    .preview-text{
+        text-align: center;
+        color: white;
+        text-decoration: underline;
+
     }
 `
 class Explore extends Component{
@@ -168,7 +175,7 @@ class Explore extends Component{
                 </div>
                     <NewPost show={this.state.showModal}>
                         <div className="post-preview">
-                            <p>preview</p>
+                            <p className="preview-text">preview</p>
                             <img src={this.state.img}/>
                             <p>{this.state.wine}</p>
                             <p>vintage:{this.state.vintage}</p>

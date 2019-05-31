@@ -24,6 +24,7 @@ const Modal = styled.div`
         display: flex;
         flex-direction: column;
         padding: 6px;
+        font-family: 'Raleway', sans-serif;
     } 
     .x-button{
         width: 32px;

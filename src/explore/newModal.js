@@ -19,8 +19,8 @@ const Modal = styled.div`
     .post-preview {
         padding: 10px;
         color: rgb(64, 49, 33);
-        width: 20vw;
         height: 50vh;
+        width: auto;
         /* width: 220px;
         height: 280px; */
         border: 1px solid white;
@@ -32,6 +32,7 @@ const Modal = styled.div`
         width: auto;
         height: 60%;
         align-self: center;
+        margin: 6px;
     }
     section {
         display: flex;
@@ -68,10 +69,6 @@ const Modal = styled.div`
         flex-direction: column;
         align-items: center;
         margin-top: 5px;
-    }
-    img {
-        width: 190px;
-        height: 180px;
     }
 `
 

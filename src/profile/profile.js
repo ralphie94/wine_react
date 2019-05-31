@@ -26,6 +26,7 @@ const ProfilePage = styled.div`
         height: 88vh;
         width: 80vw;
         padding-top: 70px;
+        font-family: 'Raleway', sans-serif;
     }
     .top-five{
         background-color: transparent;
@@ -45,8 +46,9 @@ const ProfilePage = styled.div`
         padding: 5px;
         text-align: center;
         background-color: transparent;
-        width: 10vw;
+        width: 11vw;
         margin: 6px;
+        font-family: 'Raleway', sans-serif;
 
     }
     button:hover{
@@ -75,6 +77,7 @@ const ProfilePage = styled.div`
         flex-direction: column;
         padding: 10px;
         margin: 10px;
+        border-radius: 4px;
     }
     .single-post > img {
         width: auto;
@@ -112,6 +115,12 @@ const ProfilePage = styled.div`
     .modal-buttons{
         display: flex;
         justify-content: center;   
+        margin: 10px 0;
+    }
+    .preview-text{
+        text-align: center;
+        color: white;
+        text-decoration: underline;
     }
 `
 
@@ -301,11 +310,11 @@ class Profile extends Component {
                 </EditModal>
                 <EditPostModal show={this.state.showPostModal}>
                     <div className="post-preview">
-                        <p>preview</p>
+                        <p className="preview-text">preview</p>
                         <img src={this.state.img}/>
                         <p>{this.state.wine}</p>
                         <p>vintage:{this.state.vintage}</p>
-                        <p>@{this.state.user}: {this.state.comment}</p>
+                        <p>@{this.state.username}: {this.state.comment}</p>
                     </div>
                     <div className='post-info'>
                         <form onSubmit={this.preventDefault}>

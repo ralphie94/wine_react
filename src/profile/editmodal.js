@@ -17,14 +17,15 @@ const Modal = styled.div`
         z-index: 10;
     }
     .edit-box{
-        width: 350px;
-        height: 280px;
+        width: 40vw;
+        height: 40vh;
         background-color: rgb(56, 0, 0);
         border-radius: 5px;
         border: 2px solid #cbbeb5;
         display: flex;
         flex-direction: column;
         padding: 6px;
+        font-family: 'Raleway', sans-serif;
     }
     .input{
         width: 100%;

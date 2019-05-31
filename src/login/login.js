@@ -21,6 +21,8 @@ const LoginStyle = styled.div`
     }
     span{
         color: white;
+        font-family: 'Raleway', sans-serif;
+        font-size: 18px;
     }
     button{
         border-radius: 4px;
@@ -30,6 +32,7 @@ const LoginStyle = styled.div`
         background-color: transparent;
         float: right;
         padding: 5px;
+        font-family: 'Raleway', sans-serif;
     }
     button:hover{
         color: #5a0032;

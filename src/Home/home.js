@@ -19,11 +19,12 @@ const HomePage = styled.div`
         margin-left: 15px;
         border: 2px solid rgb(90 0 50);
         border-top: 100px solid rgb(90 0 50);
+        border-radius: 5px;
     }
 
     h1 {
         text-align: center;
-        font-family: 'Nanum Myeongjo', serif;
+        font-family: 'Raleway', sans-serif;
         font-size: 30px;
         margin-top: -65px;
         color: white;
@@ -34,9 +35,11 @@ const HomePage = styled.div`
     }
     
     p{
-        font-size: 30px;
+        font-size: 25px;
         text-align: center;
         margin-top: 90px;
+        font-family: 'Josefin Slab', serif;
+
     }
 
     .verify{
@@ -48,6 +51,7 @@ const HomePage = styled.div`
         color: white;
         margin-left: 65px;
         margin-top: 30px;
+        font-family: 'Raleway', sans-serif;
     }
 
 `
