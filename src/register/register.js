@@ -23,6 +23,8 @@ const RegisterStyle = styled.div`
     }
     span{
         color: white;
+        font-family: 'Raleway', sans-serif;
+        font-size: 18px;
     }
     button{
         border-radius: 4px;
@@ -32,14 +34,17 @@ const RegisterStyle = styled.div`
         background-color: transparent;
         float: right;
         padding: 5px;
+        font-family: 'Raleway', sans-serif;
     }
     button:hover{
         color: #5a0032;
         background-color: white;
     }
     h1{
-        font-size: 40px;
+        font-size: 30px;
         color: white;
+        font-family: 'Raleway', sans-serif;
+        margin: 25px;
     }
 `
 
