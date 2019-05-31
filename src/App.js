@@ -79,6 +79,25 @@ class App extends Component {
     console.log(this.state.currentUser)
   }
 
+  // getWines = async ()=>{
+  //     try {
+  //         const data = await fetch('https://api.globalwinescore.com/globalwinescores/latest/?wine_id=', {
+  //             headers: {
+  //                 "Accept": "application/json",
+  //                 "Authorization": "Token 911c4473076f96f384b74008df0dff9596bc829c"
+  //             }
+  //         })
+  //         const parsedData = await data.json()
+  //         console.log(parsedData)
+  //     } catch (error) { 
+  //       console.log(error)
+  //     }
+  // }
+  
+  // componentDidMount(){
+  //   this.getWines()
+  // }
+  
 
   render(){
     return (
