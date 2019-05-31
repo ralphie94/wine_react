@@ -131,7 +131,7 @@ class Profile extends Component {
         })
         const updateUserJson = await updatedUser.json();
         console.log(updateUserJson)
-        // this.props.logged(updateUserJson.updateUser)
+        this.props.history.push('/')
     }
 
     deleteUser = async (e) => {

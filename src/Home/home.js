@@ -75,7 +75,7 @@ class Home extends Component {
     
     render(){
         return (
-
+            
             <HomePage>
                 <HomeModal show={this.state.showModal}>
                     <div className="agecheck">
