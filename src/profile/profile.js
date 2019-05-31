@@ -159,7 +159,6 @@ class Profile extends Component {
         this.setState({
             showModal: false
         })
-        // this.props.logged(updateUserJson.updateUser)
     }
 
     deleteUser = async (e) => {
