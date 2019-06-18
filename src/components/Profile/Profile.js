@@ -5,7 +5,6 @@ import { Redirect, withRouter} from "react-router-dom";
 import Feed from './feed';
 import EditPostModal from './editPost';
 import Ays from './aysmodal';
-// import { async } from "q";
 
 const ProfilePage = styled.div`
     background-image: url("imgs/winecellar.jpg");
