@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
-import * as routes from './constants/routes';
-import Navbar from './Navbar/Navbar';
-import Register from './Register/Register';
-import Login from './Login/Login';
-import Home from './Home/Home';
-import Explore from './Explore/Explore';
-import Profile from './Profile/Profile';
-import Feed from './Feed/Feed';
+import * as routes from './components/constants/routes';
+import Navbar from './components/Navbar/Navbar';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
+import Home from './components/Home/Home';
+import Explore from './components/Explore/Explore';
+import Profile from './components/Profile/Profile';
+import Feed from './components/Feed/Feed';
 import './App.css';
 
 class App extends Component {

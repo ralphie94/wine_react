@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Redirect } from "react-router-dom";
-import './register.css'
 
 const RegisterStyle = styled.div`
     background-color: rgb(56 0 0);
