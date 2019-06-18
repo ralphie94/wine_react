@@ -183,7 +183,7 @@ class Explore extends Component{
                         </div>
                         <div className='post-info'>
                            <form onSubmit={this.preventDefault}>
-                                <span>Upload Image:</span><input type='text' className="input" name='img' onChange={this.handleChange}/>
+                                <span>Upload Image:</span><input type='file' className="input" name='img' onChange={this.handleChange}/>
                                 <span>Wine:</span><input className="input" type='text' name='wine' value={this.state.wine} onChange={this.handleChange}/>
                                 <span>Vintage:</span><input className="input" type='text' name='vintage' value={this.state.vintage} onChange={this.handleChange}/>
                                 <span>Comments:</span><input className="input" type='text' name='comment' maxLength='200' value={this.state.comment} onChange={this.handleChange}/>
