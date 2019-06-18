@@ -125,7 +125,7 @@ class Explore extends Component{
     }
     getPosts = async ()=>{
         try {
-            const data = await fetch('http://localhost:8000/wine/posts', {
+            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts`, {
                 credentials: 'include'
             })
             const parsedData = await data.json()
@@ -145,7 +145,7 @@ class Explore extends Component{
     }
     createPost = async ()=>{
         try {
-            const data = await fetch('http://localhost:8000/wine/posts', {
+            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts`, {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(this.state),

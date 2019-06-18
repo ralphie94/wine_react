@@ -145,7 +145,7 @@ class Profile extends Component {
     }
     updateUser = async (e) => {
         e.preventDefault();
-        const data = await fetch(`http://localhost:8000/users/${this.props.user.id}`, {
+        const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${this.props.user.id}`, {
             method: "PUT",
             credentials: "include",
             body: JSON.stringify(this.state),
@@ -163,7 +163,7 @@ class Profile extends Component {
     deleteUser = async (e) => {
         e.preventDefault()
        try{
-        const removeUser = await fetch(`http://localhost:8000/users/${this.props.user.id}`, {
+        const removeUser = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${this.props.user.id}`, {
             method: "DELETE",
             credentials: "include",
             headers: {
@@ -195,7 +195,7 @@ class Profile extends Component {
 
     getPosts = async ()=>{
         try {
-            const data = await fetch(`http://localhost:8000/wine/userposts/${this.props.user.id}`, {
+            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/userposts/${this.props.user.id}`, {
                 credentials: 'include'
             })
             const parsedData = await data.json()
@@ -217,7 +217,7 @@ class Profile extends Component {
     getOnePost = async (key)=>{
         console.log(key)
         try {
-            const post = await fetch(`http://localhost:8000/wine/posts/${key}`, {
+            const post = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts/${key}`, {
                 credentials:'include'
             })
             const parsedPost = await post.json();
@@ -244,7 +244,7 @@ class Profile extends Component {
     }
     updatePost = async()=>{
         try {
-            const data = await fetch(`http://localhost:8000/wine/posts/${this.state.postId}`, {
+            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts/${this.state.postId}`, {
                 method: "PUT",
                 credentials: "include",
                 body: JSON.stringify(this.state),
@@ -266,7 +266,7 @@ class Profile extends Component {
     }
     deletePost = async()=>{
         try {
-            const data = await fetch(`http://localhost:8000/wine/posts/${this.state.postId}`, {
+            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts/${this.state.postId}`, {
                 method: "DELETE",
                 credentials: "include",
             })
