@@ -10,6 +10,8 @@ import Profile from './components/Profile/Profile';
 import Feed from './components/Feed/Feed';
 import './App.css';
 
+console.log(process.env)
+
 class App extends Component {
   state = {
     logged: false,
