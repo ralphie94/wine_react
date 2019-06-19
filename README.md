@@ -41,6 +41,9 @@ class UserPostList(Resource):
 - Styled-Components
 - CSS3
 - Sketch
+- Heroku
+
+This application is deployed on Heroku. [WinePost](https://winepost.herokuapp.com/)
 
 ### Future Improvements
 1. Apply Wine Api so app has the following functionality:
