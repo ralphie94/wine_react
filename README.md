@@ -3,6 +3,7 @@ by Ralphie Celedon & Kaitlin Park
 
 Wine Post is a social media app for wine enthusiasts by wine enthusiasts. Users (over 21 please) can create an account to connect with fellow wine enthusiasts around the world. Users can share their reviews of and experiences with wine.  
 
+[Link to Back-End GitHub Repository](https://github.com/parkaitlin/winepost_api)
 ### Wireframes
 <img src="winePost-wire.png">
 
