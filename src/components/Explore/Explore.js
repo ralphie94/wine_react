@@ -141,7 +141,7 @@ class Explore extends Component{
     }
     getPosts = async ()=>{
         try {
-            const data = await fetch(`/wine/posts`, {
+            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts`, {
                 credentials: 'include'
             })
             const parsedData = await data.json()
@@ -161,7 +161,7 @@ class Explore extends Component{
     }
     createPost = async ()=>{
         try {
-            const data = await fetch(`/wine/posts`, {
+            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts`, {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(this.state),
@@ -193,11 +193,13 @@ class Explore extends Component{
                 </div>
                     <NewPost show={this.state.showModal}>
                         <div className="post-preview">
-                            <p className="preview-text">preview</p>
-                            {imgPreview}
-                            <p>{this.state.wine}</p>
-                            <p>vintage:{this.state.vintage}</p>
-                            <p>@{this.state.user}: {this.state.comment}</p>
+                            <div>
+                                <p className="preview-text">preview</p>
+                                {imgPreview}
+                                <p>{this.state.wine}</p>
+                                <p>Vintage:{this.state.vintage}</p>
+                                <p>@{this.state.user}: {this.state.comment}</p>
+                            </div>
                         </div>
                         <div className='post-info'>
                            <form onSubmit={this.preventDefault}>

@@ -27,6 +27,11 @@ const Modal = styled.div`
         background-color: rgb(203,190,181);
         overflow-y: auto;
         transition: .6s;
+        > div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
     img {
         width: auto;
