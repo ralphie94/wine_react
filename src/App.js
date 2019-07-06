@@ -7,7 +7,7 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import Explore from './components/Explore/Explore';
 import Profile from './components/Profile/Profile';
-import Feed from './components/Feed/Feed';
+// import Feed from './components/Feed/Feed';
 import './App.css';
 
 console.log(process.env)
@@ -19,7 +19,7 @@ class App extends Component {
   }
   handleRegister = async (data) => {
     try {
-      const registerCall = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/registration`, {
+      const registerCall = await fetch(`/users/registration`, {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -44,7 +44,7 @@ class App extends Component {
 
   handleLogin = async (info)=>{
     try {
-      const loginResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/login`, {
+      const loginResponse = await fetch(`/users/login`, {
         method: "POST",
         credentials:'include',
         body: JSON.stringify(info),

@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-
 import { Link } from "react-router-dom";
-
 import * as routes from "../constants/routes";
-
-import styled, {css} from "styled-components";
-// import "./navbar.css"
+import styled from "styled-components";
 
 const NavStyle = styled.div`
     background-color: rgb(56, 0, 0);

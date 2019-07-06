@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import styled, {css} from "styled-components";
+import styled from "styled-components";
 import HomeModal from "./homeModal"
 
 
@@ -37,7 +37,7 @@ const HomePage = styled.div`
     p{
         font-size: 25px;
         text-align: center;
-        margin-top: 90px;
+        margin: 4em 1em 0;
         font-family: 'Josefin Slab', serif;
 
     }
@@ -85,7 +85,7 @@ class Home extends Component {
                 && <HomeModal show={this.state.showModal}>
                     <div className="agecheck">
                         <h1>Wine <span> Post</span></h1>
-                        <p>Must be 21+ to enter. Please verify if you are over 21.</p>
+                        <p>Must be 21+ to enter. Please verify that you are over 21 years old.</p>
                         <button onClick={this.hideModal} className="verify">Yes</button>
                         <button className="verify" onClick={this.handleSubmit}>No</button>
                     </div>

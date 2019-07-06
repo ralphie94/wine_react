@@ -5,7 +5,7 @@ const Feed = (props)=>{
     const feedPosts = props.posts.map(post=>{
         return (
             <div key={post.id} className="single-post">
-                <img src={post.img}/>
+                <img src={post.img} alt=''/>
                 <p>{post.wine}</p>
                 <p>Vintage:{post.vintage}</p>
                 <p className="single-post-comment">@{post.user}: {post.comment}</p>

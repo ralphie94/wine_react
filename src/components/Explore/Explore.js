@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 import NewPost from './newModal';
 import Feed from './feed';
 
@@ -125,7 +125,7 @@ class Explore extends Component{
     }
     getPosts = async ()=>{
         try {
-            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts`, {
+            const data = await fetch(`/wine/posts`, {
                 credentials: 'include'
             })
             const parsedData = await data.json()
@@ -145,7 +145,7 @@ class Explore extends Component{
     }
     createPost = async ()=>{
         try {
-            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts`, {
+            const data = await fetch(`/wine/posts`, {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(this.state),
@@ -176,7 +176,7 @@ class Explore extends Component{
                     <NewPost show={this.state.showModal}>
                         <div className="post-preview">
                             <p className="preview-text">preview</p>
-                            <img src={this.state.img}/>
+                            <img src={this.state.img} alt=''/>
                             <p>{this.state.wine}</p>
                             <p>vintage:{this.state.vintage}</p>
                             <p>@{this.state.user}: {this.state.comment}</p>
