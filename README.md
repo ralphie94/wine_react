@@ -3,6 +3,7 @@ by Ralphie Celedon & Kaitlin Park
 
 Wine Post is a social media app for wine enthusiasts by wine enthusiasts. Users (over 21 please) can create an account to connect with fellow wine enthusiasts around the world. Users can share their reviews of and experiences with wine.  
 
+[Link to Back-End GitHub Repository](https://github.com/parkaitlin/winepost_api)
 ### Wireframes
 <img src="winePost-wire.png">
 
@@ -41,6 +42,9 @@ class UserPostList(Resource):
 - Styled-Components
 - CSS3
 - Sketch
+- Heroku
+
+This application is deployed on Heroku. [WinePost](https://winepost.herokuapp.com/)
 
 ### Future Improvements
 1. Apply Wine Api so app has the following functionality:
