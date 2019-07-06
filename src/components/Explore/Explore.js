@@ -63,7 +63,7 @@ const ExplorePage = styled.div`
         background-color: transparent;
         width: 8.5vw;
         margin: 6px;
-
+        transition: 0.6s;
     }
     button:hover{
         /* color: rgba(52, 66, 38, 1);
@@ -83,6 +83,7 @@ const ExplorePage = styled.div`
         display: flex;
         justify-content: center;
         margin-top: 20px;
+        transition: 0.6s;
     }
     h1 {
         color: white;
@@ -99,6 +100,7 @@ class Explore extends Component{
         posts: [],
         showModal: false,
         img: '',
+        imgPreviewUrl:'',
         wine: '',
         vintage: '',
         comment: '',
@@ -115,13 +117,27 @@ class Explore extends Component{
     }
     hideModal = ()=>{
         this.setState({
-            showModal: false
+            showModal: false,
+            img: '',
+            imgPreviewUrl: ''
         })
     }
     handleChange = (e)=>{
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+    handleImage = (e)=>{
+        let reader = new FileReader()
+        let imgFile = e.target.files[0]
+
+        reader.onloadend = ()=>{
+            this.setState({
+                img: imgFile,
+                imgPreviewUrl: reader.result
+            })
+        }
+        reader.readAsDataURL(imgFile)
     }
     getPosts = async ()=>{
         try {
@@ -166,6 +182,8 @@ class Explore extends Component{
         }
     }
     render(){
+        let {imgPreviewUrl} = this.state;
+        const imgPreview = imgPreviewUrl === '' ? <div className="img-preview"></div> : <img src={imgPreviewUrl} alt ='' /> 
         return(
             <ExplorePage>
                 <div className="entire-feed">
@@ -176,14 +194,21 @@ class Explore extends Component{
                     <NewPost show={this.state.showModal}>
                         <div className="post-preview">
                             <p className="preview-text">preview</p>
-                            <img src={this.state.img} alt=''/>
+                            {imgPreview}
                             <p>{this.state.wine}</p>
                             <p>vintage:{this.state.vintage}</p>
                             <p>@{this.state.user}: {this.state.comment}</p>
                         </div>
                         <div className='post-info'>
                            <form onSubmit={this.preventDefault}>
-                                <span>Upload Image:</span><input type='file' className="input" name='img' onChange={this.handleChange}/>
+                                <input 
+                                    style={{display: 'none'}} 
+                                    type='file' 
+                                    className="input" 
+                                    name='img' 
+                                    onChange={this.handleImage}
+                                    ref={fileInput => this.fileInput = fileInput}/>
+                                <button onClick={()=> this.fileInput.click()}>Upload an Image</button> 
                                 <span>Wine:</span><input className="input" type='text' name='wine' value={this.state.wine} onChange={this.handleChange}/>
                                 <span>Vintage:</span><input className="input" type='text' name='vintage' value={this.state.vintage} onChange={this.handleChange}/>
                                 <span>Comments:</span><input className="input" type='text' name='comment' maxLength='200' value={this.state.comment} onChange={this.handleChange}/>

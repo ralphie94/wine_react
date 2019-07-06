@@ -19,28 +19,34 @@ const Modal = styled.div`
     .post-preview {
         padding: 10px;
         color: rgb(64, 49, 33);
-        height: 50vh;
+        height: 22em;
         width: auto;
         /* width: 220px;
         height: 280px; */
         border: 1px solid white;
         background-color: rgb(203,190,181);
-        overflow-y: hidden;
-        overflow-x: hidden;
+        overflow-y: auto;
+        transition: .6s;
     }
     img {
         width: auto;
-        height: 60%;
+        height: 13em;
         align-self: center;
         margin: 6px;
+    }
+    .img-preview {
+        margin-top: 1em;
+        width: 13em;
+        height: 13em;
+        background-color: #b09898;
     }
     section {
         display: flex;
         flex-direction: row;
     }
     .post-info {
-        width: 350px;
-        height: 280px;
+        width: 24em;
+        height: 22em;
         background-color: rgb(56, 0, 0);
         margin-left: 15px;
         border-radius: 5px;
