@@ -173,7 +173,7 @@ class Explore extends Component{
                 this.setState({
                     img: `${process.env.REACT_APP_BACKEND_URL}${body.destination}`
                 })
-                // this.createPost()
+                this.createPost()
             })
         })
     }
