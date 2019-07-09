@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
-import styled from "styled-components";
+import styled from "styled-components"
 import HomeModal from "./homeModal"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithubSquare, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 const HomePage = styled.div`
     background-image: url('imgs/homeimg.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 95vh;
 
     .agecheck{
         width: 350px;
@@ -47,6 +49,53 @@ const HomePage = styled.div`
         transition: 0.6s;
     }
 `
+const Footer = styled.footer`
+    background-color:rgb(56, 0, 0);
+    height: 9em;
+    > div {
+        border-bottom: 2px solid #fff;
+        background-color: rgb(24, 29, 33);
+        height: 6em;
+        display: flex;
+        flex-direction: row;
+        padding: .5em 0 1em;
+        > .project-git {
+            border-right: 2px solid #fff;
+        }
+        > section {
+            color: #fff;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Raleway', sans-serif;
+            > h2 {
+                font-size: 1.6em;
+            }
+            > div {
+                margin: 0 0 0 3em;
+            }
+        }
+    }
+    .links {
+        color: #fff;
+        font-size: 1.3em;
+    }
+    .creator {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        > a {
+            margin: .5em;
+        }
+    }
+    > p {
+        font-family: 'Josefin Slab', serif;
+        color: #fff;
+        text-align: center;
+        margin: 1em auto;
+    }
+`
 
 class Home extends Component {
     state = {
@@ -71,6 +120,7 @@ class Home extends Component {
     
     render(){
         return (
+            <>
             <HomePage>
                 {
                 !this.props.logged
@@ -84,6 +134,32 @@ class Home extends Component {
                 </HomeModal>
                 }
             </HomePage>
+            <Footer>
+                <div>
+                    <section className="project-git">
+                        <h2>View Project On <a href='https://github.com/parkaitlin/WinePost'><FontAwesomeIcon icon={faGithubSquare} className="links"/></a></h2>
+                    </section>
+                    <section>
+                        <h2>Creators:</h2>
+                        <div>
+                            <h3>Kaitlin Park</h3>
+                            <div className='creator'>
+                                <a href="https://github.com/parkaitlin"><FontAwesomeIcon icon={faGithubSquare} className="links"/></a>          
+                                <a href="https://www.linkedin.com/in/parkaitlin/"><FontAwesomeIcon icon={faLinkedin} className="links"/></a>  
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Rafael Celedon</h3>
+                            <div className='creator'>
+                                <a href="https://github.com/ralphie94"><FontAwesomeIcon icon={faGithubSquare} className="links"/></a>          
+                                <a href="https://www.linkedin.com/in/rafaelceledon/"><FontAwesomeIcon icon={faLinkedin} className="links"/></a>  
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <p>Copyright © WinePost 2019</p>
+            </Footer>
+            </>
         )
     }
 }
