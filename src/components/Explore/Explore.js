@@ -169,10 +169,10 @@ class Explore extends Component{
         }).then(response=>{
             console.log(response)
             response.json().then(body=>{
-                console.log(body)
-                // this.setState({
-                //     img: `${process.env.REACT_APP_BACKEND_URL}${body.destination}`
-                // })
+                console.log(body.destination)
+                this.setState({
+                    img: `${process.env.REACT_APP_BACKEND_URL}${body.destination}`
+                })
                 // this.createPost()
             })
         })
