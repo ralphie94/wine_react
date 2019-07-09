@@ -34,6 +34,7 @@ const RegisterStyle = styled.div`
         float: right;
         padding: 5px;
         font-family: 'Raleway', sans-serif;
+        transition: 0.6s;
     }
     button:hover{
         color: #5a0032;
@@ -59,6 +60,7 @@ class Register extends Component {
             [e.target.name]: e.target.value
         })
     }
+
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.handleRegister(this.state)
@@ -68,7 +70,6 @@ class Register extends Component {
         const { username, password, verify_password } = this.state
         return(
             <div>
-                
             {this.props.logged
             ? <Redirect to={`/`}/>
             : <RegisterForm 

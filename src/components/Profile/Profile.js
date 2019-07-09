@@ -41,14 +41,13 @@ const ProfilePage = styled.div`
         font-size: 16px;
         color: white;
         border: 1px solid white;
-        /* background-color: rgba(64, 49, 33, 0.7); */
         padding: 5px;
         text-align: center;
         background-color: transparent;
         width: 11vw;
         margin: 6px;
         font-family: 'Raleway', sans-serif;
-
+        transition: 0.6s;
     }
     button:hover{
         border: 2px solid rgb(56, 0, 0); 
@@ -91,17 +90,14 @@ const ProfilePage = styled.div`
         font-size: 12px;
         color: white;
         border: 1px solid white;
-        /* background-color: rgba(64, 49, 33, 0.7); */
         padding: 5px;
         text-align: center;
         background-color: transparent;
         width: 6vw;
         margin: 6px;
-
+        transition: 0.6s;
     }
     .small-button:hover, .edit-profile:hover{
-        /* color: rgba(52, 66, 38, 1);
-        background-color: rgba(131,165,97, 0.8);*/
         border: 2px solid white; 
         color: white;
         background-color: #5a0032;
@@ -110,11 +106,13 @@ const ProfilePage = styled.div`
     .edit-buttons{
         display: flex;
         align-self: flex-end;
+        transition: 0.6s;
     }
     .modal-buttons{
         display: flex;
         justify-content: center;   
         margin: 10px 0;
+        transition: 0.6s;
     }
     .preview-text{
         text-align: center;
@@ -138,11 +136,13 @@ class Profile extends Component {
         comment: '',
         postId: '',
     }
+
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
+
     updateUser = async (e) => {
         e.preventDefault();
         const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${this.props.user.id}`, {
@@ -171,13 +171,12 @@ class Profile extends Component {
             }
         })
         const removeUserJson = await removeUser.json();
-        console.log(removeUserJson)
         this.props.history.push('/')
         if(removeUserJson.deleted){
             this.props.deleteLogout()
         }
-       } catch(err){
-           console.log(err);
+       } catch(error){
+           console.log(error);
        }
     }
 
@@ -199,14 +198,13 @@ class Profile extends Component {
                 credentials: 'include'
             })
             const parsedData = await data.json()
-            console.log(parsedData)
             return parsedData
         } catch (error) {
             console.log(error)
         }
     }
+    
     componentDidMount(){
-        console.log('user posts did mount')
         this.getPosts().then(data=>{
             this.setState({
                 userPosts: data
@@ -215,13 +213,11 @@ class Profile extends Component {
     }
 
     getOnePost = async (key)=>{
-        console.log(key)
         try {
             const post = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts/${key}`, {
                 credentials:'include'
             })
             const parsedPost = await post.json();
-            console.log(parsedPost)
             this.setState({
                 postId: key,
                 img: parsedPost.img,
@@ -236,7 +232,6 @@ class Profile extends Component {
         }
     }
     postForDelete = (key)=>{
-        console.log(key)
         this.setState({
             postId: key,
             aysModal: true

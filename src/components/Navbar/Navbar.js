@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import * as routes from "../constants/routes";
 import styled from "styled-components";
@@ -34,34 +34,31 @@ const NavStyle = styled.div`
     span {
         text-decoration: underline;
     }
-
 `
 
-class Navbar extends Component {
-    render(){
-        return(
-            <NavStyle>
-                <div className="none">
-                {
-                   this.props.logged && <Link to={routes.PROFILE} className="nav-link">Cellar</Link>
-                }
-                {
-                   this.props.logged && <Link to={routes.EXPLORE} className="nav-link">Explore</Link>
-                }
-                {
-                    this.props.logged && <Link to={routes.FEED} className="nav-link">Feed</Link>
-                }
-                </div>
-                <h1>Wine <span> Post</span></h1>
-                <div className="links">
-                    <Link to={routes.HOME} className="nav-link">Home</Link>                            
-                    {this.props.logged && <Link to={routes.LOGOUT}className="nav-link">Logout</Link>}
-                    {!this.props.logged && <Link to={routes.LOGIN} className="nav-link">Login</Link>}
-                    {!this.props.logged && <Link to={routes.REGISTER} className="nav-link">Register</Link>}   
-                </div>
-            </NavStyle>
-        )
-    }
+const Navbar = (props)=>{
+    return(
+        <NavStyle>
+            <div className="none">
+            {
+                props.logged && <Link to={routes.PROFILE} className="nav-link">Cellar</Link>
+            }
+            {
+                props.logged && <Link to={routes.EXPLORE} className="nav-link">Explore</Link>
+            }
+            {/* {
+                props.logged && <Link to={routes.FEED} className="nav-link">Feed</Link>
+            } */}
+            </div>
+            <h1>Wine <span> Post</span></h1>
+            <div className="links">
+                <Link to={routes.HOME} className="nav-link">Home</Link>                            
+                {props.logged && <Link to={routes.LOGOUT} onClick={props.logout} className="nav-link">Logout</Link>}
+                {!props.logged && <Link to={routes.LOGIN} className="nav-link">Login</Link>}
+                {!props.logged && <Link to={routes.REGISTER} className="nav-link">Register</Link>}   
+            </div>
+        </NavStyle>
+    )
 }
 
 export default Navbar;

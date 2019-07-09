@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import NewPost from './newModal';
 import Feed from './feed';
 
-
 const ExplorePage = styled.div`
     background-image: url("imgs/explorepg.jpg");
     background-position: center;
@@ -57,7 +56,6 @@ const ExplorePage = styled.div`
         font-size: 20px;
         color: white;
         border: 1px solid white;
-        /* background-color: rgba(64, 49, 33, 0.7); */
         padding: 5px;
         text-align: center;
         background-color: transparent;
@@ -66,8 +64,6 @@ const ExplorePage = styled.div`
         transition: 0.6s;
     }
     button:hover{
-        /* color: rgba(52, 66, 38, 1);
-        background-color: rgba(131,165,97, 0.8);*/
         border: 2px solid #5a0032; 
         color: #5a0032;
         background-color: white;
@@ -88,49 +84,51 @@ const ExplorePage = styled.div`
     h1 {
         color: white;
     }
-    .preview-text{
-        text-align: center;
-        color: white;
-        text-decoration: underline;
-
-    }
 `
+
 class Explore extends Component{
     state = {
         posts: [],
         showModal: false,
-        img: '',
         imgPreviewUrl:'',
+        img: '',
         wine: '',
         vintage: '',
         comment: '',
         user: this.props.user.username,
         posted_by: this.props.user.id
     }
+
     preventDefault = (e)=>{
         e.preventDefault();
     }
+
     showModal = ()=>{
         this.setState({
             showModal: true
         })
     }
+
     hideModal = ()=>{
         this.setState({
             showModal: false,
             img: '',
-            imgPreviewUrl: ''
+            imgPreviewUrl: '',
+            wine: '',
+            vintage: '',
+            comment: '',
         })
     }
+
     handleChange = (e)=>{
         this.setState({
             [e.target.name]: e.target.value
         })
     }
-    handleImage = (e)=>{
+
+    handleImagePreview = async(e)=>{
         let reader = new FileReader()
         let imgFile = e.target.files[0]
-
         reader.onloadend = ()=>{
             this.setState({
                 img: imgFile,
@@ -139,26 +137,45 @@ class Explore extends Component{
         }
         reader.readAsDataURL(imgFile)
     }
+
     getPosts = async ()=>{
         try {
             const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts`, {
                 credentials: 'include'
             })
             const parsedData = await data.json()
-            console.log(parsedData)
             return parsedData
         } catch (error) {
             console.log(error)
         }
     }
+
     componentDidMount(){
-        console.log('component did mount')
         this.getPosts().then(data=>{
             this.setState({
                 posts: data
             })
         })
     }
+
+    uploadImage = ()=>{
+        const image = new FormData();
+        image.append('file', this.state.img)
+        image.append('filename', this.state.img.name)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/upload`, {
+            method: 'POST',
+            body: image,
+        }).then(response=>{
+            response.json().then(body=>{
+                const imgUrl = body.destination.slice(1)
+                this.setState({
+                    img: `${process.env.REACT_APP_BACKEND_URL}${imgUrl}`
+                })
+                this.createPost()
+            })
+        })
+    }
+
     createPost = async ()=>{
         try {
             const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts`, {
@@ -176,11 +193,12 @@ class Explore extends Component{
                     showModal: false
                 })
             })
-            console.log(parsedData)
+            return parsedData
         } catch (error) {
             console.log(error)
         }
     }
+    
     render(){
         let {imgPreviewUrl} = this.state;
         const imgPreview = imgPreviewUrl === '' ? <div className="img-preview"></div> : <img src={imgPreviewUrl} alt ='' /> 
@@ -193,32 +211,34 @@ class Explore extends Component{
                 </div>
                     <NewPost show={this.state.showModal}>
                         <div className="post-preview">
+                            <p className="preview-text">preview</p>
+                            {imgPreview}
                             <div>
-                                <p className="preview-text">preview</p>
-                                {imgPreview}
                                 <p>{this.state.wine}</p>
                                 <p>Vintage:{this.state.vintage}</p>
                                 <p>@{this.state.user}: {this.state.comment}</p>
                             </div>
                         </div>
                         <div className='post-info'>
-                           <form onSubmit={this.preventDefault}>
-                                <input 
-                                    style={{display: 'none'}} 
-                                    type='file' 
-                                    className="input" 
-                                    name='img' 
-                                    onChange={this.handleImage}
-                                    ref={fileInput => this.fileInput = fileInput}/>
-                                <button onClick={()=> this.fileInput.click()}>Upload an Image</button> 
-                                <span>Wine:</span><input className="input" type='text' name='wine' value={this.state.wine} onChange={this.handleChange}/>
-                                <span>Vintage:</span><input className="input" type='text' name='vintage' value={this.state.vintage} onChange={this.handleChange}/>
-                                <span>Comments:</span><input className="input" type='text' name='comment' maxLength='200' value={this.state.comment} onChange={this.handleChange}/>
-                            </form>
-                            <div className="modal-buttons">
-                                <button onClick={this.createPost} >Post</button>
-                                <button onClick={this.hideModal} >Cancel</button>
-                            </div>    
+                            <div>
+                                <form onSubmit={this.preventDefault}>
+                                    <input 
+                                        style={{display: 'none'}} 
+                                        type='file' 
+                                        className="input" 
+                                        name='img' 
+                                        onChange={this.handleImagePreview}
+                                        ref={fileInput => this.fileInput = fileInput}/>
+                                    <button onClick={()=> this.fileInput.click()}>Upload an Image</button> 
+                                    <span>Wine:</span><input className="input" type='text' name='wine' value={this.state.wine} onChange={this.handleChange}/>
+                                    <span>Vintage:</span><input className="input" type='text' name='vintage' value={this.state.vintage} onChange={this.handleChange}/>
+                                    <span>Comments:</span><input className="input" type='text' name='comment' maxLength='200' value={this.state.comment} onChange={this.handleChange}/>
+                                </form>
+                                <div className="modal-buttons">
+                                    <button onClick={this.uploadImage} >Post</button>
+                                    <button onClick={this.hideModal} >Cancel</button>
+                                </div>    
+                            </div>
                         </div>
                     </NewPost>
             </ExplorePage>

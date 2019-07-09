@@ -2,14 +2,11 @@ import React, {Component} from 'react'
 import styled from "styled-components";
 import HomeModal from "./homeModal"
 
-
-
 const HomePage = styled.div`
     background-image: url('imgs/homeimg.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    /* overflow-y: scroll; */
     height: 100vh;
 
     .agecheck{
@@ -21,7 +18,6 @@ const HomePage = styled.div`
         border-top: 100px solid rgb(90 0 50);
         border-radius: 5px;
     }
-
     h1 {
         text-align: center;
         font-family: 'Raleway', sans-serif;
@@ -29,19 +25,15 @@ const HomePage = styled.div`
         margin-top: -65px;
         color: white;
     }
-
     span{
         text-decoration: underline;
     }
-    
     p{
         font-size: 25px;
         text-align: center;
         margin: 4em 1em 0;
         font-family: 'Josefin Slab', serif;
-
     }
-
     .verify{
         width: 75px;
         height: 50px;
@@ -52,8 +44,8 @@ const HomePage = styled.div`
         margin-left: 65px;
         margin-top: 30px;
         font-family: 'Raleway', sans-serif;
+        transition: 0.6s;
     }
-
 `
 
 class Home extends Component {
@@ -92,7 +84,6 @@ class Home extends Component {
                 </HomeModal>
                 }
             </HomePage>
-            
         )
     }
 }
