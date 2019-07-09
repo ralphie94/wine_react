@@ -167,9 +167,8 @@ class Explore extends Component{
             body: image,
         }).then(response=>{
             response.json().then(body=>{
-                const imgUrl = body.destination.slice(1)
                 this.setState({
-                    img: `${process.env.REACT_APP_BACKEND_URL}${imgUrl}`
+                    img: `${process.env.REACT_APP_BACKEND_URL}${body.destination}`
                 })
                 this.createPost()
             })
