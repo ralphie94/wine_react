@@ -166,11 +166,13 @@ class Explore extends Component{
             method: 'POST',
             body: image,
         }).then(response=>{
+            console.log(response)
             response.json().then(body=>{
-                this.setState({
-                    img: `${process.env.REACT_APP_BACKEND_URL}${body.destination}`
-                })
-                this.createPost()
+                console.log(body.destination)
+                // this.setState({
+                //     img: `${process.env.REACT_APP_BACKEND_URL}${body.destination}`
+                // })
+                // this.createPost()
             })
         })
     }
