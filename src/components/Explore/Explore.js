@@ -165,6 +165,7 @@ class Explore extends Component{
         fetch(`${process.env.REACT_APP_BACKEND_URL}/upload`, {
             method: 'POST',
             body: image,
+            credentials: 'include',
         }).then(response=>{
             console.log(response)
             response.json().then(body=>{
