@@ -69,7 +69,7 @@ const ProfilePage = styled.div`
     .single-post{
         background-color: rgb(203,190,181);
         color: rgb(64, 49, 33);
-        height: 50vh;
+        height: calc(max-content + 5em);
         width: auto;
         display: flex;
         flex-direction: column;
@@ -78,8 +78,9 @@ const ProfilePage = styled.div`
         border-radius: 4px;
     }
     .single-post > img {
-        width: auto;
-        height: 60%;
+        width: 14em;
+        height: 14em;
+        object-fit: cover;
         align-self: center;
     }
     .single-post-comment {

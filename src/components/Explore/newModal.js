@@ -28,8 +28,9 @@ const Modal = styled.div`
         transition: .6s;
     }
     img {
-        width: auto;
         height: 13em;
+        width: 13em;
+        object-fit: cover;
         margin: .5em auto;
         display: flex;
     }
@@ -56,7 +57,7 @@ const Modal = styled.div`
     }
     .input{
         height: 20px;
-        width: 40vh;
+        min-width: 17em;
         border-radius: 1vh;
         font-size: 20px;
         border: transparent;

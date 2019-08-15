@@ -35,7 +35,7 @@ const ExplorePage = styled.div`
     .single-post{
         background-color: rgb(203,190,181);
         color: rgb(64, 49, 33);
-        height: 50vh;
+        min-height: calc(max-content + 5em);
         width: auto;
         display: flex;
         flex-direction: column;
@@ -44,8 +44,9 @@ const ExplorePage = styled.div`
         border-radius: 4px;
     }
     .single-post > img {
-        width: auto;
-        height: 60%;
+        width: 14em;
+        height: 14em;
+        object-fit: cover;
         align-self: center;
     }
     .single-post-comment {
@@ -129,13 +130,15 @@ class Explore extends Component{
     handleImagePreview = async(e)=>{
         let reader = new FileReader()
         let imgFile = e.target.files[0]
-        reader.onloadend = ()=>{
-            this.setState({
-                img: imgFile,
-                imgPreviewUrl: reader.result
-            })
+        if(e.target.files[0]){
+            reader.onloadend = ()=>{
+                this.setState({
+                    img: imgFile,
+                    imgPreviewUrl: reader.result
+                })
+            }
+            reader.readAsDataURL(imgFile)
         }
-        reader.readAsDataURL(imgFile)
     }
 
     getPosts = async ()=>{
