@@ -33,6 +33,7 @@ const LoginStyle = styled.div`
         float: right;
         padding: 5px;
         font-family: 'Raleway', sans-serif;
+        transition: 0.6s;
     }
     button:hover{
         color: #5a0032;
@@ -49,15 +50,18 @@ class Login extends Component {
         username: "",
         password: ""
     }
+
     handleChange = (e)=>{
         this.setState({
             [e.target.name]: e.target.value
         })
     }
+
     handleSubmit = (e)=>{
         e.preventDefault()
         this.props.login(this.state)
     }
+    
     render(){
         return(
             this.props.logged

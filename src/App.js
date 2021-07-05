@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
-import * as routes from './constants/routes';
-import Navbar from './navbar/navbar';
-import Register from './register/register';
-import Login from './login/login';
-import Home from './Home/home';
-import Explore from './explore/explore';
-import Profile from './profile/profile';
-import Feed from './feed/feed';
+import * as routes from './components/constants/routes';
+import Navbar from './components/Navbar/Navbar';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
+import Home from './components/Home/Home';
+import Explore from './components/Explore/Explore';
+import Profile from './components/Profile/Profile';
 import './App.css';
+// import Feed from './components/Feed/Feed';
 
 class App extends Component {
   state = {
     logged: false,
     currentUser: ""
   }
+
   handleRegister = async (data) => {
     try {
-      const registerCall = await fetch('http://localhost:8000/users/registration', {
+      const registerCall = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/registration`, {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -25,24 +26,21 @@ class App extends Component {
           'Content-Type': 'application/json'
         }
       })
-
       const response = await registerCall.json()
-      console.log(response, 'from the flask server');
       if(response.register){
         this.setState({
           logged: true,
           currentUser: response.user
         })
       } 
-
-    } catch(err){
-      console.log(err)
+    } catch(error){
+      console.log(error)
     }
   }
 
   handleLogin = async (info)=>{
     try {
-      const loginResponse = await fetch('http://localhost:8000/users/login', {
+      const loginResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/login`, {
         method: "POST",
         credentials:'include',
         body: JSON.stringify(info),
@@ -51,21 +49,18 @@ class App extends Component {
         }
       })
       const parsedData = await loginResponse.json()
-      console.log(parsedData);
       if(parsedData.message === 'success'){
         this.setState({
           logged: true,
           currentUser: parsedData.user
-
         })
       }
-
     } catch (error) {
       console.log(error)
     }
   }
   
-  deleteLogout = ()=>{
+  logout = ()=>{
     this.setState({
       logged: false,
       currentUser: null
@@ -76,33 +71,12 @@ class App extends Component {
     this.setState({
       currentUser: info
     })
-    console.log(this.state.currentUser)
   }
-
-  // getWines = async ()=>{
-  //     try {
-  //         const data = await fetch('https://api.globalwinescore.com/globalwinescores/latest/?wine_id=', {
-  //             headers: {
-  //                 "Accept": "application/json",
-  //                 "Authorization": "Token 911c4473076f96f384b74008df0dff9596bc829c"
-  //             }
-  //         })
-  //         const parsedData = await data.json()
-  //         console.log(parsedData)
-  //     } catch (error) { 
-  //       console.log(error)
-  //     }
-  // }
-  
-  // componentDidMount(){
-  //   this.getWines()
-  // }
-  
 
   render(){
     return (
       <div className="App">
-      <Navbar logged={this.state.logged}/>
+      <Navbar logged={this.state.logged} logout={this.logout} />
       <Switch>
         <Route exact path={routes.REGISTER} render={() => <Register handleRegister={this.handleRegister} logged={this.state.logged}/>} />
         <Route exact path={routes.LOGIN} render={() => <Login login={this.handleLogin} logged={this.state.logged}/>}/>

@@ -5,7 +5,6 @@ import { Redirect, withRouter} from "react-router-dom";
 import Feed from './feed';
 import EditPostModal from './editPost';
 import Ays from './aysmodal';
-// import { async } from "q";
 
 const ProfilePage = styled.div`
     background-image: url("imgs/winecellar.jpg");
@@ -42,14 +41,13 @@ const ProfilePage = styled.div`
         font-size: 16px;
         color: white;
         border: 1px solid white;
-        /* background-color: rgba(64, 49, 33, 0.7); */
         padding: 5px;
         text-align: center;
         background-color: transparent;
         width: 11vw;
         margin: 6px;
         font-family: 'Raleway', sans-serif;
-
+        transition: 0.6s;
     }
     button:hover{
         border: 2px solid rgb(56, 0, 0); 
@@ -71,7 +69,7 @@ const ProfilePage = styled.div`
     .single-post{
         background-color: rgb(203,190,181);
         color: rgb(64, 49, 33);
-        height: 50vh;
+        height: calc(max-content + 5em);
         width: auto;
         display: flex;
         flex-direction: column;
@@ -80,8 +78,9 @@ const ProfilePage = styled.div`
         border-radius: 4px;
     }
     .single-post > img {
-        width: auto;
-        height: 60%;
+        width: 14em;
+        height: 14em;
+        object-fit: cover;
         align-self: center;
     }
     .single-post-comment {
@@ -92,17 +91,14 @@ const ProfilePage = styled.div`
         font-size: 12px;
         color: white;
         border: 1px solid white;
-        /* background-color: rgba(64, 49, 33, 0.7); */
         padding: 5px;
         text-align: center;
         background-color: transparent;
         width: 6vw;
         margin: 6px;
-
+        transition: 0.6s;
     }
     .small-button:hover, .edit-profile:hover{
-        /* color: rgba(52, 66, 38, 1);
-        background-color: rgba(131,165,97, 0.8);*/
         border: 2px solid white; 
         color: white;
         background-color: #5a0032;
@@ -111,11 +107,13 @@ const ProfilePage = styled.div`
     .edit-buttons{
         display: flex;
         align-self: flex-end;
+        transition: 0.6s;
     }
     .modal-buttons{
         display: flex;
         justify-content: center;   
         margin: 10px 0;
+        transition: 0.6s;
     }
     .preview-text{
         text-align: center;
@@ -139,14 +137,16 @@ class Profile extends Component {
         comment: '',
         postId: '',
     }
+
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
+
     updateUser = async (e) => {
         e.preventDefault();
-        const data = await fetch(`http://localhost:8000/users/${this.props.user.id}`, {
+        const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${this.props.user.id}`, {
             method: "PUT",
             credentials: "include",
             body: JSON.stringify(this.state),
@@ -164,7 +164,7 @@ class Profile extends Component {
     deleteUser = async (e) => {
         e.preventDefault()
        try{
-        const removeUser = await fetch(`http://localhost:8000/users/${this.props.user.id}`, {
+        const removeUser = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${this.props.user.id}`, {
             method: "DELETE",
             credentials: "include",
             headers: {
@@ -172,13 +172,12 @@ class Profile extends Component {
             }
         })
         const removeUserJson = await removeUser.json();
-        console.log(removeUserJson)
         this.props.history.push('/')
         if(removeUserJson.deleted){
             this.props.deleteLogout()
         }
-       } catch(err){
-           console.log(err);
+       } catch(error){
+           console.log(error);
        }
     }
 
@@ -196,18 +195,17 @@ class Profile extends Component {
 
     getPosts = async ()=>{
         try {
-            const data = await fetch(`http://localhost:8000/wine/userposts/${this.props.user.id}`, {
+            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/userposts/${this.props.user.id}`, {
                 credentials: 'include'
             })
             const parsedData = await data.json()
-            console.log(parsedData)
             return parsedData
         } catch (error) {
             console.log(error)
         }
     }
+    
     componentDidMount(){
-        console.log('user posts did mount')
         this.getPosts().then(data=>{
             this.setState({
                 userPosts: data
@@ -216,13 +214,11 @@ class Profile extends Component {
     }
 
     getOnePost = async (key)=>{
-        console.log(key)
         try {
-            const post = await fetch(`http://localhost:8000/wine/posts/${key}`, {
+            const post = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts/${key}`, {
                 credentials:'include'
             })
             const parsedPost = await post.json();
-            console.log(parsedPost)
             this.setState({
                 postId: key,
                 img: parsedPost.img,
@@ -237,7 +233,6 @@ class Profile extends Component {
         }
     }
     postForDelete = (key)=>{
-        console.log(key)
         this.setState({
             postId: key,
             aysModal: true
@@ -245,7 +240,7 @@ class Profile extends Component {
     }
     updatePost = async()=>{
         try {
-            const data = await fetch(`http://localhost:8000/wine/posts/${this.state.postId}`, {
+            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts/${this.state.postId}`, {
                 method: "PUT",
                 credentials: "include",
                 body: JSON.stringify(this.state),
@@ -260,6 +255,7 @@ class Profile extends Component {
                     showPostModal: false
                 })
             })
+            return parsedData
             
         } catch (error) {
             console.log(error)
@@ -267,16 +263,18 @@ class Profile extends Component {
     }
     deletePost = async()=>{
         try {
-            const data = await fetch(`http://localhost:8000/wine/posts/${this.state.postId}`, {
+            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts/${this.state.postId}`, {
                 method: "DELETE",
                 credentials: "include",
             })
+            const parsedData = data.json()
             this.getPosts().then(data=>{
                 this.setState({
                     userPosts: data,
                     aysModal: false
                 })
             })
+            return parsedData
         } catch (error) {
             console.log(error)
         }
@@ -310,7 +308,7 @@ class Profile extends Component {
                 <EditPostModal show={this.state.showPostModal}>
                     <div className="post-preview">
                         <p className="preview-text">preview</p>
-                        <img src={this.state.img}/>
+                        <img src={this.state.img} alt=''/>
                         <p>{this.state.wine}</p>
                         <p>vintage:{this.state.vintage}</p>
                         <p>@{this.state.username}: {this.state.comment}</p>

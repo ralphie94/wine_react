@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 import NewPost from './newModal';
 import Feed from './feed';
-
 
 const ExplorePage = styled.div`
     background-image: url("imgs/explorepg.jpg");
@@ -36,7 +35,7 @@ const ExplorePage = styled.div`
     .single-post{
         background-color: rgb(203,190,181);
         color: rgb(64, 49, 33);
-        height: 50vh;
+        min-height: calc(max-content + 5em);
         width: auto;
         display: flex;
         flex-direction: column;
@@ -45,8 +44,9 @@ const ExplorePage = styled.div`
         border-radius: 4px;
     }
     .single-post > img {
-        width: auto;
-        height: 60%;
+        width: 14em;
+        height: 14em;
+        object-fit: cover;
         align-self: center;
     }
     .single-post-comment {
@@ -57,17 +57,14 @@ const ExplorePage = styled.div`
         font-size: 20px;
         color: white;
         border: 1px solid white;
-        /* background-color: rgba(64, 49, 33, 0.7); */
         padding: 5px;
         text-align: center;
         background-color: transparent;
         width: 8.5vw;
         margin: 6px;
-
+        transition: 0.6s;
     }
     button:hover{
-        /* color: rgba(52, 66, 38, 1);
-        background-color: rgba(131,165,97, 0.8);*/
         border: 2px solid #5a0032; 
         color: #5a0032;
         background-color: white;
@@ -83,21 +80,18 @@ const ExplorePage = styled.div`
         display: flex;
         justify-content: center;
         margin-top: 20px;
+        transition: 0.6s;
     }
     h1 {
         color: white;
     }
-    .preview-text{
-        text-align: center;
-        color: white;
-        text-decoration: underline;
-
-    }
 `
+
 class Explore extends Component{
     state = {
         posts: [],
         showModal: false,
+        imgPreviewUrl:'',
         img: '',
         wine: '',
         vintage: '',
@@ -105,47 +99,89 @@ class Explore extends Component{
         user: this.props.user.username,
         posted_by: this.props.user.id
     }
+
     preventDefault = (e)=>{
         e.preventDefault();
     }
+
     showModal = ()=>{
         this.setState({
             showModal: true
         })
     }
+
     hideModal = ()=>{
         this.setState({
-            showModal: false
+            showModal: false,
+            img: '',
+            imgPreviewUrl: '',
+            wine: '',
+            vintage: '',
+            comment: '',
         })
     }
+
     handleChange = (e)=>{
         this.setState({
             [e.target.name]: e.target.value
         })
     }
+
+    handleImagePreview = async(e)=>{
+        let reader = new FileReader()
+        let imgFile = e.target.files[0]
+        if(e.target.files[0]){
+            reader.onloadend = ()=>{
+                this.setState({
+                    img: imgFile,
+                    imgPreviewUrl: reader.result
+                })
+            }
+            reader.readAsDataURL(imgFile)
+        }
+    }
+
     getPosts = async ()=>{
         try {
-            const data = await fetch('http://localhost:8000/wine/posts', {
+            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts`, {
                 credentials: 'include'
             })
             const parsedData = await data.json()
-            console.log(parsedData)
             return parsedData
         } catch (error) {
             console.log(error)
         }
     }
+
     componentDidMount(){
-        console.log('component did mount')
         this.getPosts().then(data=>{
             this.setState({
                 posts: data
             })
         })
     }
+
+    uploadImage = ()=>{
+        const image = new FormData();
+        image.append('file', this.state.img)
+        image.append('filename', this.state.img.name)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/upload`, {
+            method: 'POST',
+            body: image,
+            credentials: 'include',
+        }).then(response=>{
+            response.json().then(body=>{
+                this.setState({
+                    img: `${process.env.REACT_APP_BACKEND_URL}${body.destination}`
+                })
+                this.createPost()
+            })
+        })
+    }
+
     createPost = async ()=>{
         try {
-            const data = await fetch('http://localhost:8000/wine/posts', {
+            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/wine/posts`, {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(this.state),
@@ -160,12 +196,15 @@ class Explore extends Component{
                     showModal: false
                 })
             })
-            console.log(parsedData)
+            return parsedData
         } catch (error) {
             console.log(error)
         }
     }
+    
     render(){
+        let {imgPreviewUrl} = this.state;
+        const imgPreview = imgPreviewUrl === '' ? <div className="img-preview"></div> : <img src={imgPreviewUrl} alt ='' /> 
         return(
             <ExplorePage>
                 <div className="entire-feed">
@@ -176,22 +215,33 @@ class Explore extends Component{
                     <NewPost show={this.state.showModal}>
                         <div className="post-preview">
                             <p className="preview-text">preview</p>
-                            <img src={this.state.img}/>
-                            <p>{this.state.wine}</p>
-                            <p>vintage:{this.state.vintage}</p>
-                            <p>@{this.state.user}: {this.state.comment}</p>
+                            {imgPreview}
+                            <div>
+                                <p>{this.state.wine}</p>
+                                <p>Vintage:{this.state.vintage}</p>
+                                <p>@{this.state.user}: {this.state.comment}</p>
+                            </div>
                         </div>
                         <div className='post-info'>
-                           <form onSubmit={this.preventDefault}>
-                                <span>Upload Image:</span><input type='text' className="input" name='img' onChange={this.handleChange}/>
-                                <span>Wine:</span><input className="input" type='text' name='wine' value={this.state.wine} onChange={this.handleChange}/>
-                                <span>Vintage:</span><input className="input" type='text' name='vintage' value={this.state.vintage} onChange={this.handleChange}/>
-                                <span>Comments:</span><input className="input" type='text' name='comment' maxLength='200' value={this.state.comment} onChange={this.handleChange}/>
-                            </form>
-                            <div className="modal-buttons">
-                                <button onClick={this.createPost} >Post</button>
-                                <button onClick={this.hideModal} >Cancel</button>
-                            </div>    
+                            <div>
+                                <form onSubmit={this.preventDefault}>
+                                    <input 
+                                        style={{display: 'none'}} 
+                                        type='file' 
+                                        className="input" 
+                                        name='img' 
+                                        onChange={this.handleImagePreview}
+                                        ref={fileInput => this.fileInput = fileInput}/>
+                                    <button onClick={()=> this.fileInput.click()}>Upload an Image</button> 
+                                    <span>Wine:</span><input className="input" type='text' name='wine' value={this.state.wine} onChange={this.handleChange}/>
+                                    <span>Vintage:</span><input className="input" type='text' name='vintage' value={this.state.vintage} onChange={this.handleChange}/>
+                                    <span>Comments:</span><input className="input" type='text' name='comment' maxLength='200' value={this.state.comment} onChange={this.handleChange}/>
+                                </form>
+                                <div className="modal-buttons">
+                                    <button onClick={this.uploadImage} >Post</button>
+                                    <button onClick={this.hideModal} >Cancel</button>
+                                </div>    
+                            </div>
                         </div>
                     </NewPost>
             </ExplorePage>

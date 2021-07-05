@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 
 const Modal = styled.div`
     
@@ -20,7 +20,7 @@ const Modal = styled.div`
         padding: 10px;
         color: rgb(64, 49, 33);
         width: auto;
-        height: 50vh;
+        height: calc(max-content + 5em);
         /* width: 220px;
         height: 280px; */
         border: 1px solid white;
@@ -29,8 +29,9 @@ const Modal = styled.div`
         overflow-x: hidden;
     }
     img {
-        width: auto;
-        height: 57%;
+        width: 14em;
+        height: 14em;
+        object-fit: cover;
         align-self: center;
         margin: 6px;
     }
@@ -49,7 +50,7 @@ const Modal = styled.div`
     }
     .input{
         height: auto;
-        width: 40vh;
+        width: 15em;
         border-radius: 1vh;
         font-size: 20px;
         border: transparent;

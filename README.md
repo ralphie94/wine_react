@@ -1,8 +1,9 @@
 # WinePost
 by Ralphie Celedon & Kaitlin Park
 
-Wine Post is a social media app for wine enthusiasts by wine enthusiasts. Users (over 21 please) can create an account to connect with fellow wine enthusiasts around the world. Users can share their reviews of and experiences with wine.  
+Wine Post is a social media app for wine enthusiasts by wine enthusiasts. Users (over 21 please) can create an account to connect with fellow wine enthusiasts! This application encourages users to share their reviews of and experiences with wine.  
 
+[Link to Back-End GitHub Repository](https://github.com/parkaitlin/winepost_api)
 ### Wireframes
 <img src="winePost-wire.png">
 
@@ -29,9 +30,10 @@ class UserPostList(Resource):
 ### User Story:
 1. User must confirm that they are over 21 years of age.
 2. User can register or login.
-3. Once the user is logged, they are able to access the explore, feed and cellar features of the application
-4. Explore is populated with all posts, Feed will be populated with posts by users that the current user has designated as friends or decided to follow.
-5. The Cellar contains the user's profile, top 5 wines, and all of the current user's posts.
+3. Once the user is logged, they are able to access the explore and cellar features of the application
+4. Explore is populated with all posts, and the Feed feature will be populated with posts by users that the current user has designated as friends or decided to follow.
+5. In Explore, the user is able to create a New Post. When a user selects "New Post", the user can upload a photo along with information like the name of the wine, the vintage, and a comment.
+6. The Cellar contains the user's profile info, and all of the current user's posts. Here, both the user's profile and posts are editable.
 
 ### Technologies
 - React
@@ -41,6 +43,9 @@ class UserPostList(Resource):
 - Styled-Components
 - CSS3
 - Sketch
+- Heroku
+
+This application is deployed on Heroku. [WinePost](https://winepost.herokuapp.com/)
 
 ### Future Improvements
 1. Apply Wine Api so app has the following functionality:

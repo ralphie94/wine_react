@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 
 const Modal = styled.div`
     
@@ -19,36 +19,45 @@ const Modal = styled.div`
     .post-preview {
         padding: 10px;
         color: rgb(64, 49, 33);
-        height: 50vh;
-        width: auto;
-        /* width: 220px;
-        height: 280px; */
+        height: 22em;
+        max-width: 20em;
+        min-width: 14.5em;
         border: 1px solid white;
         background-color: rgb(203,190,181);
-        overflow-y: hidden;
-        overflow-x: hidden;
+        overflow-y: auto;
+        transition: .6s;
     }
     img {
-        width: auto;
-        height: 60%;
-        align-self: center;
-        margin: 6px;
+        height: 13em;
+        width: 13em;
+        object-fit: cover;
+        margin: .5em auto;
+        display: flex;
+    }
+    .img-preview {
+        margin: .5em 0;
+        width: 13em;
+        height: 13em;
+        background-color: #b09898;
     }
     section {
         display: flex;
         flex-direction: row;
     }
     .post-info {
-        width: 350px;
-        height: 280px;
+        width: 24em;
+        height: 22em;
         background-color: rgb(56, 0, 0);
         margin-left: 15px;
         border-radius: 5px;
         border: 2px solid #cbbeb5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .input{
         height: 20px;
-        width: 40vh;
+        min-width: 17em;
         border-radius: 1vh;
         font-size: 20px;
         border: transparent;
@@ -69,6 +78,11 @@ const Modal = styled.div`
         flex-direction: column;
         align-items: center;
         margin-top: 5px;
+    }
+    .preview-text{
+        text-align: center;
+        color: rgb(64, 49, 33);        
+        text-decoration: underline;
     }
 `
 

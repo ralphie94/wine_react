@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 
 const Modal = styled.div`
     .hide-modal {
@@ -14,6 +14,15 @@ const Modal = styled.div`
         justify-content: center;
         position: relative;
         z-index: 10;
+        animation: fadeIn 3s ease;
+    }
+    @keyframes fadeIn {
+        0% {
+            opacity: 0
+        }
+        100% {
+            opacity: 1
+        }
     }
 `
 
